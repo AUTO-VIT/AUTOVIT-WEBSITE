@@ -1,0 +1,30 @@
+{
+  "rules": {
+    "recruitments": {
+      ".read": "auth != null && auth.token.email === 'it.autovit22@gmail.com'",
+      ".write": "auth != null && auth.token.email === 'it.autovit22@gmail.com'",
+      "$uid": {
+        ".write": "(!data.exists() && newData.exists()) || (auth != null && auth.token.email === 'it.autovit22@gmail.com')",
+        ".validate": "newData.exists() ? newData.hasChildren(['name', 'regNo', 'department', 'year', 'domains', 'experience', 'portfolio', 'reason', 'timestamp']) : true"
+      }
+    },
+    "events": {
+      ".read": "true",
+      ".write": "auth != null && auth.token.email === 'it.autovit22@gmail.com'",
+      "$event_id": {
+        ".validate": "newData.hasChildren(['title', 'description', 'date', 'duration', 'location'])"
+      }
+    },
+    "team": {
+      ".read": "true",
+      ".write": "auth != null && auth.token.email === 'it.autovit22@gmail.com'",
+      "$member_id": {
+        ".validate": "newData.hasChildren(['name', 'role', 'image'])"
+      }
+    },
+    "settings": {
+       ".read": "true",
+       ".write": "auth != null && auth.token.email === 'it.autovit22@gmail.com'"
+    }
+  }
+}
