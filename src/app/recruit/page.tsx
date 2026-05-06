@@ -86,7 +86,7 @@ export default function RecruitPage() {
           <div className="flex items-center gap-4 mb-10">
             <div className="w-12 h-12 bg-white flex items-center justify-center rounded-sm border border-gray-100 shadow-sm overflow-hidden p-1">
               <Image 
-                src="/WhatsApp Image 2026-05-04 at 16.38.06.jpeg" 
+                src="/autovit-logo.jpeg" 
                 alt="AutoVIT Logo" 
                 width={40} 
                 height={40}

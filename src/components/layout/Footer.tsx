@@ -10,7 +10,7 @@ export default function Footer() {
         <div className="flex flex-col md:flex-row justify-between items-center gap-8">
           <div className="flex items-center gap-3">
             <Image 
-              src="/WhatsApp Image 2026-05-04 at 16.38.06.jpeg" 
+              src="/autovit-logo.jpeg" 
               alt="AutoVIT Logo" 
               width={32} 
               height={32}
