@@ -14,12 +14,9 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-const app = (typeof window !== "undefined" || firebaseConfig.apiKey) 
-  ? (getApps().length > 0 ? getApp() : initializeApp(firebaseConfig))
-  : undefined;
-
-const auth = app ? getAuth(app) : undefined as any;
-const db = app ? getFirestore(app) : undefined as any;
-const rtdb = app ? getDatabase(app) : undefined as any;
+const app = getApps().length > 0 ? getApp() : initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+const rtdb = getDatabase(app);
 
 export { app, auth, db, rtdb };

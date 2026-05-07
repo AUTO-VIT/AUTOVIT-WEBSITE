@@ -85,6 +85,7 @@ export default function RecruitmentDashboard() {
   const deleteApp = async (id: string) => {
     if (!confirm("Are you sure you want to delete this application?")) return;
     try {
+      console.log("Attempting to delete application with ID:", id);
       await remove(ref(rtdb, `recruitments/${id}`));
       alert("Application deleted successfully.");
     } catch (error: any) {

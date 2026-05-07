@@ -38,7 +38,7 @@ export default function Navbar() {
           <Link href="/" className="flex items-center gap-3 group">
             <div className="relative w-10 h-10 transition-transform group-hover:scale-110">
               <Image 
-                src="/autovit-logo.jpeg" 
+                src="/WhatsApp Image 2026-05-04 at 16.38.06.jpeg" 
                 alt="AutoVIT Logo" 
                 fill 
                 className="object-contain"

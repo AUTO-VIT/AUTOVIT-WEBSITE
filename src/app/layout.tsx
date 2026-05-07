@@ -20,32 +20,6 @@ const orbitron = Orbitron({
 export const metadata: Metadata = {
   title: "AutoVIT - Robotics & Automation Club",
   description: "Where Technology Meets Innovation. Join us in shaping the future of robotics and automation.",
-  keywords: ["AutoVIT", "Robotics", "Automation", "VIT Chennai", "Engineering", "Club"],
-  authors: [{ name: "AutoVIT Team" }],
-  openGraph: {
-    title: "AutoVIT - Robotics & Automation Club",
-    description: "Where Technology Meets Innovation. Join us in shaping the future of robotics and automation.",
-    url: "https://autovit.in",
-    siteName: "AutoVIT",
-    images: [
-      {
-        url: "/autovit-logo.jpeg",
-        width: 800,
-        height: 600,
-      },
-    ],
-    locale: "en_US",
-    type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "AutoVIT - Robotics & Automation Club",
-    description: "Where Technology Meets Innovation.",
-    images: ["/autovit-logo.jpeg"],
-  },
-  icons: {
-    icon: "/autovit-logo.jpeg",
-  },
 };
 
 export default function RootLayout({
