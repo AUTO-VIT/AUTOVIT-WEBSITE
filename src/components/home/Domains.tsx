@@ -51,7 +51,7 @@ const itemVariants = {
 
 export default function Domains() {
   return (
-    <section id="domains" className="py-24 bg-white dark:bg-black relative overflow-hidden transition-colors duration-500">
+    <section id="domains" className="relative z-10 py-24 bg-transparent overflow-hidden transition-colors duration-500">
       <motion.div 
         initial={{ opacity: 0, x: 100 }}
         whileInView={{ opacity: 1, x: 20 }}

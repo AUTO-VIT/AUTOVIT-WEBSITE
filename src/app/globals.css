@@ -143,3 +143,8 @@ html.dark body {
 .animate-spin-reverse {
   animation: spin-reverse 20s linear infinite;
 }
+@media (pointer: fine) {
+  * {
+    cursor: none !important;
+  }
+}

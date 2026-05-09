@@ -11,23 +11,23 @@ export default function CustomCursor() {
   const [mounted, setMounted] = useState(false);
 
   const cursorX = useSpring(0, {
-    damping: 20,
-    stiffness: 250,
+    damping: 35,
+stiffness: 600,
   });
 
   const cursorY = useSpring(0, {
-    damping: 20,
-    stiffness: 250,
+    damping: 35,
+stiffness: 600,
   });
 
   const dotX = useSpring(0, {
-    damping: 25,
-    stiffness: 350,
+    damping: 40,
+    stiffness: 900,
   });
 
   const dotY = useSpring(0, {
-    damping: 25,
-    stiffness: 350,
+    damping: 40,
+    stiffness: 900,
   });
 
   useEffect(() => {
@@ -64,13 +64,10 @@ export default function CustomCursor() {
         z-[9999]
         hidden md:block
 
-        border border-red-600/40
-        dark:border-red-500/60
+        border border-red-600/50
+        dark:border-red-500/70
 
-        bg-red-600/5
-        dark:bg-red-500/10
-
-        backdrop-blur-sm
+        bg-transparent
 
         shadow-[0_0_18px_rgba(220,38,38,0.25)]
         dark:shadow-[0_0_24px_rgba(220,38,38,0.45)]

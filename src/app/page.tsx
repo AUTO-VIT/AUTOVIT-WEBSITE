@@ -12,13 +12,7 @@ import ParticlesBackground from "@/components/ParticlesBackground";
 export default function Home() {
   return (
     <main
-      className="
-      relative
-      min-h-screen
-      bg-white dark:bg-black
-      transition-colors duration-500
-      overflow-hidden
-      "
+      className="relative min-h-screen overflow-hidden"
     >
       {/* Global Background */}
       <ParticlesBackground />

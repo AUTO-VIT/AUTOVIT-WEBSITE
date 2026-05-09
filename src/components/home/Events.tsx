@@ -59,11 +59,11 @@ export default function Events() {
       className="
       py-24
       relative
-      bg-gray-50/40 dark:bg-zinc-950
-      border-y border-gray-200 dark:border-zinc-800
+      z-10
+      bg-black/5 dark:bg-black/20
+      border-y border-gray-200/20 dark:border-zinc-800/30
       overflow-hidden
-      transition-colors duration-500
-      "
+      transition-colors duration-500"
     >
       {/* Ambient Glow */}
       <div

@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 
 export default function About() {
   return (
-    <section id="about" className="py-24 bg-gray-50/50 dark:bg-zinc-950 border-y border-gray-100 dark:border-zinc-800 overflow-hidden transition-colors duration-500">
+    <section id="about" className="relative z-10 py-24 bg-black/5 dark:bg-black/20 border-y border-gray-100/20 dark:border-zinc-800/30 overflow-hidden transition-colors duration-500">
       <div className="container mx-auto px-6">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           <motion.div 

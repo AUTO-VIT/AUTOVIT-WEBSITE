@@ -177,7 +177,6 @@ export default function RecruitPage() {
         >
           {/* Header */}
           <div className="flex items-center gap-4 mb-10">
-            
             <div
               className="
               w-14 h-14
@@ -280,25 +279,30 @@ export default function RecruitPage() {
               </button>
             </div>
           ) : (
-
-            /* FORM */
             <form
               onSubmit={handleSubmit}
               className="space-y-8"
             >
-              {/* Shared Input Styling */}
               {(() => {
                 const inputClass = `
                   w-full
+
                   bg-gray-50 dark:bg-zinc-800
+
                   border border-gray-200 dark:border-zinc-700
+
                   px-6 py-4
+
                   rounded-xl
+
                   focus:outline-none
                   focus:border-red-600
                   focus:ring-2 focus:ring-red-600/20
+
                   transition-all
+
                   text-gray-900 dark:text-white
+
                   placeholder:text-gray-400
                 `;
 
@@ -306,7 +310,7 @@ export default function RecruitPage() {
                   <>
                     {/* Name + Reg */}
                     <div className="grid md:grid-cols-2 gap-6">
-                      
+
                       <div className="space-y-2">
                         <label className="text-xs font-black uppercase tracking-widest text-primary">
                           Full Name
@@ -348,7 +352,7 @@ export default function RecruitPage() {
 
                     {/* Department + Year */}
                     <div className="grid md:grid-cols-2 gap-6">
-                      
+
                       <div className="space-y-2">
                         <label className="text-xs font-black uppercase tracking-widest text-primary">
                           Department / Branch
@@ -374,32 +378,57 @@ export default function RecruitPage() {
                           Year of Study
                         </label>
 
-                        <select
-                          required
-                          value={formData.year}
-                          onChange={(e) =>
-                            setFormData({
-                              ...formData,
-                              year: e.target.value,
-                            })
-                          }
-                          className={inputClass}
-                        >
-                          {years.map((year) => (
-                            <option
-                              key={year}
-                              value={year}
-                            >
-                              {year}
-                            </option>
-                          ))}
-                        </select>
+                        <div className="relative">
+                          <select
+                            required
+                            value={formData.year}
+                            onChange={(e) =>
+                              setFormData({
+                                ...formData,
+                                year: e.target.value,
+                              })
+                            }
+                            className={`
+                              ${inputClass}
+
+                              appearance-none
+
+                              pr-14
+                            `}
+                          >
+                            {years.map((year) => (
+                              <option
+                                key={year}
+                                value={year}
+                              >
+                                {year}
+                              </option>
+                            ))}
+                          </select>
+
+                          <div
+                            className="
+                            pointer-events-none
+
+                            absolute
+                            right-5
+                            top-1/2
+                            -translate-y-1/2
+
+                            text-gray-500 dark:text-gray-400
+
+                            text-xs
+                            "
+                          >
+                            ▼
+                          </div>
+                        </div>
                       </div>
                     </div>
 
                     {/* Domains */}
                     <div className="space-y-4">
-                      
+
                       <div className="flex justify-between items-center">
                         <label className="text-xs font-black uppercase tracking-widest text-primary">
                           Interested Domains

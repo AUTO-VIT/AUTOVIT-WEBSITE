@@ -16,11 +16,11 @@ export default function Contact() {
       id="contact"
       className="
       py-24
-      bg-white dark:bg-black
+      bg-transparent
       overflow-hidden
       relative
-      transition-colors duration-500
-      "
+      z-10
+      transition-colors duration-500"
     >
       {/* Ambient Glow */}
       <div

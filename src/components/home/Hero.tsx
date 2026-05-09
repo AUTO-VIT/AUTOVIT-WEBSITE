@@ -22,7 +22,7 @@ export default function Hero() {
   };
 
   return (
-    <section id="home" className="relative min-h-screen flex items-center pt-24 lg:pt-0 overflow-hidden bg-white dark:bg-black transition-colors duration-500">
+    <section id="home" className="relative z-10 min-h-screen flex items-center pt-24 lg:pt-0 overflow-hidden bg-transparent transition-colors duration-500">
       <div className="container mx-auto px-6 grid lg:grid-cols-2 gap-12 lg:gap-8 items-center z-10 py-12">
         <motion.div 
           variants={containerVariants}
@@ -32,7 +32,7 @@ export default function Hero() {
         >
           <motion.div variants={itemVariants} className="glitch-wrapper">
             <h1 
-              className="font-orbitron text-5xl sm:text-6xl md:text-7xl xl:text-8xl font-black text-gray-900 dark:text-red-600 mb-4 tracking-tighter uppercase relative inline-block lg:block glitch"
+              className="font-orbitron text-4xl sm:text-5xl md:text-6xl xl:text-7xl font-black text-gray-900 dark:text-red-600 mb-3 tracking-[-0.06em] uppercase relative inline-block lg:block glitch leading-none"
               data-text="AutoVIT"
             >
               <span className="relative z-10">
@@ -43,9 +43,26 @@ export default function Hero() {
               </span>
             </h1>
           </motion.div>
-          <motion.p variants={itemVariants} className="text-red-600 font-orbitron font-bold text-lg sm:text-xl xl:text-2xl mb-6 tracking-widest uppercase">
-            Robotics | Automation | Innovation
-          </motion.p>
+          <motion.p
+  variants={itemVariants}
+  className="
+  text-red-600
+  font-orbitron
+  font-bold
+
+  text-sm sm:text-base xl:text-lg
+
+  mb-5
+
+  tracking-[0.22em]
+
+  uppercase
+
+  leading-none
+  "
+>
+  Robotics | Automation | Innovation
+</motion.p>
           <motion.p variants={itemVariants} className="text-gray-600 dark:text-gray-300 text-base sm:text-lg xl:text-xl max-w-lg mb-10 font-rajdhani leading-relaxed mx-auto lg:mx-0">
             Where Technology Meets Innovation. Join us in shaping the future of robotics, automation, and mechanical engineering.
           </motion.p>
