@@ -75,7 +75,7 @@ const ParticlesBackground = memo(function ParticlesBackground() {
           value: 150,
         },
         opacity: {
-          value: { min: 0.3, max: 0.6 },
+          value: { min: 0.2, max: 0.5 },
         },
         shape: {
           type: "circle",
@@ -94,7 +94,7 @@ const ParticlesBackground = memo(function ParticlesBackground() {
   return (
     <Particles
       id="tsparticles"
-      className="absolute inset-0 -z-10"
+      className="absolute inset-0-z-10opacity-70 dark:opacity-100transition-opacity duration-500"
       options={options}
     />
   );

@@ -16,6 +16,7 @@
     "framer-motion": "^12.38.0",
     "lucide-react": "^0.378.0",
     "next": "14.2.3",
+    "next-themes": "^0.4.6",
     "papaparse": "^5.4.1",
     "react": "^18",
     "react-dom": "^18",
@@ -27,9 +28,9 @@
     "@types/papaparse": "^5.3.14",
     "@types/react": "^18",
     "@types/react-dom": "^18",
-    "autoprefixer": "^10.4.19",
-    "postcss": "^8.4.38",
-    "tailwindcss": "^3.4.3",
+    "autoprefixer": "^10.5.0",
+    "postcss": "^8.5.14",
+    "tailwindcss": "^3.4.19",
     "typescript": "^5"
   }
 }
