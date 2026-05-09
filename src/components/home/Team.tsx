@@ -104,7 +104,7 @@ export default function Team() {
             >
               {team.map((member) => (
                 <SwiperSlide key={member.id}>
-                  <div className="bg-white/40 dark:bg-zinc-900/60 backdrop-blur-md p-8 rounded-sm shadow-sm dark:shadow-md border border-red-600/10 dark:border-red-500/20 flex flex-col items-center text-center group transition-all hover:shadow-xl dark:hover:shadow-lg hover:border-red-600/50 dark:hover:border-red-500/40 h-full relative overflow-hidden">
+                  <div className="bg-white/40 dark:bg-zinc-900/60 backdrop-blur-md p-8 rounded-sm shadow-sm dark:shadow-md border border-red-600/10 dark:border-red-500/20 flex flex-col items-center text-center group transition-all hover:shadow-xl dark:hover:shadow-red-500/20 hover:border-red-600/50 dark:hover:border-red-500/40">
                     <div className="relative w-32 h-32 mb-6 rounded-full overflow-hidden border-2 border-red-600/10 group-hover:border-red-600 dark:group-hover:border-red-500 transition-colors">
                       {member.photoUrl ? (
                         <Image 
@@ -146,11 +146,30 @@ export default function Team() {
       </div>
 
       <style jsx global>{`
+        .swiper-pagination-bullet {
+          background: #6B7280 !important;
+          opacity: 0.8;
+        }
+
+        .dark .swiper-pagination-bullet {
+          background: #9CA3AF !important;
+          opacity: 1;
+        }
+
         .swiper-pagination-bullet-active {
           background: #dc2626 !important;
         }
+
+        .dark .swiper-pagination-bullet-active {
+          background: #ef4444 !important;
+        }
+
         .swiper-button-next, .swiper-button-prev {
           color: #dc2626 !important;
+        }
+
+        .dark .swiper-button-next, .dark .swiper-button-prev {
+          color: #ef4444 !important;
         }
       `}</style>
     </section>
