@@ -83,7 +83,7 @@ export default function Domains() {
               key={idx} 
               variants={itemVariants}
               whileHover={{ y: -10 }}
-              className="bg-white/40 dark:bg-zinc-900/60 backdrop-blur-md border border-red-600/10 dark:border-red-500/20 p-8 rounded-sm group hover:border-red-600/50 dark:hover:border-red-500/40 hover:shadow-xl dark:hover:shadow-lg transition-all duration-500 relative overflow-hidden"
+              className="bg-white/40 dark:bg-zinc-900/60 backdrop-blur-md border border-red-600/10 dark:border-red-500/20 p-8 rounded-sm group hover:border-red-600/50 dark:hover:border-red-500/40 hover:shadow-xl dark:hover:shadow-red-500/20 transition-all duration-500 relative overflow-hidden"
             >
               <div className="absolute top-0 left-0 w-1 h-0 bg-red-600 group-hover:h-full transition-all duration-500"></div>
               <div className="text-red-600 text-4xl mb-6 group-hover:scale-110 transition-transform duration-500 origin-left">
