@@ -32,13 +32,13 @@ export default function Hero() {
         >
           <motion.div variants={itemVariants} className="glitch-wrapper">
             <h1 
-              className="font-orbitron text-4xl sm:text-5xl md:text-6xl xl:text-7xl font-black text-gray-900 dark:text-red-600 mb-3 tracking-[-0.06em] uppercase relative inline-block lg:block glitch leading-none"
+              className="font-orbitron text-4xl sm:text-5xl md:text-6xl xl:text-7xl font-black text-gray-900 dark:text-[#dc2626] mb-3 tracking-[-0.06em] uppercase relative inline-block lg:block glitch leading-none"
               data-text="AutoVIT"
             >
               <span className="relative z-10">
                 <span>AutoVIT</span>
               </span>
-              <span className="absolute top-0 left-0 -z-10 text-red-600/20 dark:text-red-600/30 blur-sm translate-x-1 translate-y-1 w-full select-none pointer-events-none">
+              <span className="absolute top-0 left-0 -z-10 text-red-600/20 dark:text-red-400/30 blur-sm translate-x-1 translate-y-1 w-full select-none pointer-events-none">
                 AutoVIT
               </span>
             </h1>
@@ -82,7 +82,7 @@ export default function Hero() {
           transition={{ duration: 1.2, ease: "easeOut" }}
           className="relative flex justify-center items-center"
         >
-          <div className="relative w-64 h-64 md:w-96 md:h-96 rounded-full border border-red-600/20 dark:border-red-500/30 flex justify-center items-center overflow-hidden animate-spin-slow">
+          <div className="relative w-64 h-64 md:w-96 md:h-96 rounded-full border border-red-600/20 dark:border-[#991b1b]/30 flex justify-center items-center overflow-hidden animate-spin-slow">
             <div className="absolute inset-0 border-t-2 border-red-600 rounded-full" style={{ transform: "rotate(45deg)" }}></div>
             <div className="absolute inset-2 border-r-2 border-gray-300 dark:border-zinc-700 rounded-full" style={{ animationDirection: "reverse" }}></div>
             <div className="absolute inset-4 border-b-2 border-red-600/50 rounded-full"></div>
@@ -107,3 +107,5 @@ export default function Hero() {
     </section>
   );
 }
+
+

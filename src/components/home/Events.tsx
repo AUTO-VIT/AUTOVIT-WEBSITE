@@ -175,12 +175,12 @@ export default function Events() {
                   bg-white/80 dark:bg-zinc-900/80
                   backdrop-blur-md
                   rounded-2xl
-                  border border-red-600/10 dark:border-red-500/20
+                  border border-red-600/10 dark:border-[#991b1b]/20
                   overflow-hidden
                   group
                   transition-all duration-500
                   hover:border-red-600/50
-                  hover:shadow-[0_0_30px_rgba(220,38,38,0.18)]
+                  hover:shadow-[0_0_30px_rgba(90,18,18,0.18)]
                   relative
                   flex flex-col
                   "
@@ -307,7 +307,7 @@ export default function Events() {
                     className="
                     bg-gray-50/60 dark:bg-zinc-900/60
                     px-8 py-4
-                    border-t border-red-600/10 dark:border-red-500/10
+                    border-t border-red-600/10 dark:border-[#991b1b]/10
                     flex justify-end
                     mt-auto
                     "
@@ -392,3 +392,5 @@ export default function Events() {
     </section>
   );
 }
+
+

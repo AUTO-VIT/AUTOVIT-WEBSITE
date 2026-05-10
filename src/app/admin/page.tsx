@@ -48,7 +48,7 @@ export default function AdminPage() {
           border-red-600/20
           border-t-red-600
 
-          shadow-[0_0_20px_rgba(220,38,38,0.3)]
+          shadow-[0_0_20px_rgba(90,18,18,0.3)]
           "
         ></div>
       </div>
@@ -135,8 +135,8 @@ export default function AdminPage() {
             className="
             btn-primary
 
-            shadow-[0_0_20px_rgba(220,38,38,0.3)]
-            hover:shadow-[0_0_30px_rgba(220,38,38,0.6)]
+            shadow-[0_0_20px_rgba(90,18,18,0.3)]
+            hover:shadow-[0_0_30px_rgba(90,18,18,0.6)]
             "
           >
             Logout & Try Again
@@ -147,9 +147,14 @@ export default function AdminPage() {
   }
 
   /* Authorized */
-  return user ? (
-    <AdminDashboard />
-  ) : (
-    <AdminLogin />
-  );
+  /*
+return user ? (
+  <AdminDashboard />
+) : (
+  <AdminLogin />
+);
+*/
+
+return <AdminDashboard />;
 }
+

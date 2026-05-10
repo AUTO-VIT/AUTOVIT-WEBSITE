@@ -323,7 +323,7 @@ export default function RecruitmentDashboard() {
                   bg-red-600
                   text-white
 
-                  shadow-[0_0_25px_rgba(220,38,38,0.35)]
+                  shadow-[0_0_25px_rgba(90,18,18,0.35)]
                 `
                 : `
                   bg-white/60 dark:bg-zinc-900/60
@@ -373,7 +373,7 @@ export default function RecruitmentDashboard() {
 
             hover:border-red-500/30
 
-            hover:shadow-[0_0_25px_rgba(220,38,38,0.12)]
+            hover:shadow-[0_0_25px_rgba(90,18,18,0.12)]
 
             transition-all duration-300
             "
@@ -778,3 +778,4 @@ export default function RecruitmentDashboard() {
     </div>
   );
 }
+

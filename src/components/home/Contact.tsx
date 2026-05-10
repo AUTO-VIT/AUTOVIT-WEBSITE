@@ -270,7 +270,7 @@ export default function Contact() {
                   hover:bg-red-600
                   hover:text-white
                   hover:border-red-600
-                  hover:shadow-[0_0_20px_rgba(220,38,38,0.4)]
+                  hover:shadow-[0_0_20px_rgba(90,18,18,0.4)]
                   transition-all duration-300
                   "
                 >
@@ -302,7 +302,7 @@ export default function Contact() {
               space-y-6
               bg-white/60 dark:bg-zinc-900/70
               backdrop-blur-md
-              border border-red-600/10 dark:border-red-500/20
+              border border-red-600/10 dark:border-[#991b1b]/20
               p-8
               rounded-3xl
               shadow-xl
@@ -316,7 +316,7 @@ export default function Contact() {
                   placeholder="Your Name"
                   className="
                   bg-gray-50 dark:bg-zinc-800
-                  border border-red-600/10 dark:border-red-500/10
+                  border border-red-600/10 dark:border-[#991b1b]/10
                   p-4
                   rounded-xl
                   focus:outline-none
@@ -335,7 +335,7 @@ export default function Contact() {
                   placeholder="Your Email"
                   className="
                   bg-gray-50 dark:bg-zinc-800
-                  border border-red-600/10 dark:border-red-500/10
+                  border border-red-600/10 dark:border-[#991b1b]/10
                   p-4
                   rounded-xl
                   focus:outline-none
@@ -357,7 +357,7 @@ export default function Contact() {
                 className="
                 w-full
                 bg-gray-50 dark:bg-zinc-800
-                border border-red-600/10 dark:border-red-500/10
+                border border-red-600/10 dark:border-[#991b1b]/10
                 p-4
                 rounded-xl
                 focus:outline-none
@@ -378,7 +378,7 @@ export default function Contact() {
                 className="
                 w-full
                 bg-gray-50 dark:bg-zinc-800
-                border border-red-600/10 dark:border-red-500/10
+                border border-red-600/10 dark:border-[#991b1b]/10
                 p-4
                 rounded-xl
                 focus:outline-none
@@ -399,8 +399,8 @@ export default function Contact() {
                 className="
                 btn-primary
                 w-full md:w-auto
-                shadow-[0_0_20px_rgba(220,38,38,0.3)]
-                hover:shadow-[0_0_30px_rgba(220,38,38,0.6)]
+                shadow-[0_0_20px_rgba(90,18,18,0.3)]
+                hover:shadow-[0_0_30px_rgba(90,18,18,0.6)]
                 "
               >
                 Send Message
@@ -412,3 +412,5 @@ export default function Contact() {
     </section>
   );
 }
+
+

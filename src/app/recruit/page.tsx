@@ -271,8 +271,8 @@ export default function RecruitPage() {
                 }
                 className="
                 btn-primary
-                shadow-[0_0_20px_rgba(220,38,38,0.3)]
-                hover:shadow-[0_0_30px_rgba(220,38,38,0.6)]
+                shadow-[0_0_20px_rgba(90,18,18,0.3)]
+                hover:shadow-[0_0_30px_rgba(90,18,18,0.6)]
                 "
               >
                 Submit Another
@@ -471,7 +471,7 @@ export default function RecruitPage() {
                                   bg-red-600/10
                                   border-red-600
                                   text-red-600
-                                  shadow-[0_0_18px_rgba(220,38,38,0.2)]
+                                  shadow-[0_0_18px_rgba(90,18,18,0.2)]
                                 `
                                 : `
                                   bg-gray-50 dark:bg-zinc-800
@@ -594,7 +594,7 @@ export default function RecruitPage() {
               {status === "error" && (
                 <div
                   className="
-                  bg-red-50 dark:bg-red-500/10
+                  bg-red-50 dark:bg-[#991b1b]/10
                   text-red-600
                   p-4
                   rounded-xl
@@ -623,8 +623,8 @@ export default function RecruitPage() {
                 tracking-[0.2em]
                 disabled:opacity-50
 
-                shadow-[0_0_20px_rgba(220,38,38,0.3)]
-                hover:shadow-[0_0_30px_rgba(220,38,38,0.6)]
+                shadow-[0_0_20px_rgba(90,18,18,0.3)]
+                hover:shadow-[0_0_30px_rgba(90,18,18,0.6)]
                 "
               >
                 {status === "loading"
@@ -640,3 +640,5 @@ export default function RecruitPage() {
     </main>
   );
 }
+
+

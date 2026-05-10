@@ -75,7 +75,7 @@ export default function Navbar() {
                 <li key={link.name}>
                   <Link
                     href={link.href}
-                    className="font-rajdhani font-semibold text-gray-700 dark:text-gray-300 hover:text-red-600 dark:hover:text-red-500 transition-colors relative group"
+                    className="font-rajdhani font-semibold text-gray-700 dark:text-gray-300 hover:text-red-600 dark:hover:text-[#7f1d1d] transition-colors relative group"
                   >
                     {link.name}
 
@@ -171,3 +171,4 @@ export default function Navbar() {
     </>
   );
 }
+

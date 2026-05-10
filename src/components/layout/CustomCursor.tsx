@@ -65,12 +65,12 @@ stiffness: 600,
         hidden md:block
 
         border border-red-600/50
-        dark:border-red-500/70
+        dark:border-[#991b1b]/70
 
         bg-transparent
 
-        shadow-[0_0_18px_rgba(220,38,38,0.25)]
-        dark:shadow-[0_0_24px_rgba(220,38,38,0.45)]
+        shadow-[0_0_18px_rgba(90,18,18,0.25)]
+        dark:shadow-[0_0_24px_rgba(90,18,18,0.45)]
         "
         style={{
           x: cursorX,
@@ -89,8 +89,8 @@ stiffness: 600,
         z-[9999]
         hidden md:block
 
-        shadow-[0_0_12px_rgba(220,38,38,0.8)]
-        dark:shadow-[0_0_16px_rgba(220,38,38,1)]
+        shadow-[0_0_12px_rgba(90,18,18,0.8)]
+        dark:shadow-[0_0_16px_rgba(90,18,18,1)]
         "
         style={{
           x: dotX,
@@ -100,3 +100,5 @@ stiffness: 600,
     </>
   );
 }
+
+

@@ -117,7 +117,7 @@ export default function Team() {
                   key={member.id}
                   className="h-auto flex"
                 >
-                  <div className="bg-white/40 dark:bg-zinc-900/60 backdrop-blur-md p-8 rounded-sm shadow-sm dark:shadow-md border border-red-600/10 dark:border-red-500/20 flex flex-col items-center text-center group transition-all hover:shadow-xl dark:hover:shadow-red-500/20 hover:border-red-600/50 dark:hover:border-red-500/40 w-full min-h-[420px]">
+                  <div className="bg-white/40 dark:bg-zinc-900/60 backdrop-blur-md p-8 rounded-sm shadow-sm dark:shadow-md border border-red-600/10 dark:border-[#991b1b]/20 flex flex-col items-center text-center group transition-all hover:shadow-xl dark:hover:shadow-red-500/20 hover:border-red-600/50 dark:hover:border-[#991b1b]/40 w-full min-h-[420px]">
 
                     <div className="relative w-32 h-32 mb-6 rounded-full overflow-hidden border-2 border-red-600/10 group-hover:border-red-600 dark:group-hover:border-red-500 transition-colors flex-shrink-0">
                       {member.photoUrl ? (
@@ -146,7 +146,7 @@ export default function Team() {
                           href={member.github}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-gray-400 dark:text-gray-500 hover:text-red-600 dark:hover:text-red-500 transition-colors"
+                          className="text-gray-400 dark:text-gray-500 hover:text-red-600 dark:hover:text-[#7f1d1d] transition-colors"
                         >
                           <Github size={20} />
                         </a>
@@ -157,7 +157,7 @@ export default function Team() {
                           href={member.linkedin}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-gray-400 dark:text-gray-500 hover:text-red-600 dark:hover:text-red-500 transition-colors"
+                          className="text-gray-400 dark:text-gray-500 hover:text-red-600 dark:hover:text-[#7f1d1d] transition-colors"
                         >
                           <Linkedin size={20} />
                         </a>
@@ -216,3 +216,4 @@ export default function Team() {
     </section>
   );
 }
+

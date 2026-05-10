@@ -166,7 +166,7 @@ export default function AdminLogin() {
 
               border border-zinc-800
 
-              shadow-[0_0_25px_rgba(220,38,38,0.15)]
+              shadow-[0_0_25px_rgba(90,18,18,0.15)]
 
               group-hover:bg-red-600
 
@@ -219,7 +219,7 @@ export default function AdminLogin() {
 
                 tracking-[0.4em]
 
-                drop-shadow-[0_0_10px_rgba(220,38,38,0.5)]
+                drop-shadow-[0_0_10px_rgba(90,18,18,0.5)]
                 "
               >
                 AUTOVIT CONTROL PORTAL
@@ -393,8 +393,8 @@ export default function AdminLogin() {
 
               rounded-xl
 
-              shadow-[0_0_25px_rgba(220,38,38,0.3)]
-              hover:shadow-[0_0_35px_rgba(220,38,38,0.6)]
+              shadow-[0_0_25px_rgba(90,18,18,0.3)]
+              hover:shadow-[0_0_35px_rgba(90,18,18,0.6)]
 
               transition-all
 
@@ -413,3 +413,4 @@ export default function AdminLogin() {
     </main>
   );
 }
+

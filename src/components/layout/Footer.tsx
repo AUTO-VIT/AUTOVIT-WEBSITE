@@ -112,14 +112,14 @@ export default function Footer() {
                 className="
                 text-gray-600 dark:text-gray-400
                 hover:text-red-600
-                dark:hover:text-red-500
+                dark:hover:text-[#7f1d1d]
                 font-rajdhani
                 uppercase
                 text-sm
                 font-semibold
                 tracking-widest
                 transition-all duration-300
-                hover:drop-shadow-[0_0_8px_rgba(220,38,38,0.6)]
+                hover:drop-shadow-[0_0_8px_rgba(90,18,18,0.6)]
                 "
               >
                 {link.name}
@@ -131,3 +131,5 @@ export default function Footer() {
     </footer>
   );
 }
+
+

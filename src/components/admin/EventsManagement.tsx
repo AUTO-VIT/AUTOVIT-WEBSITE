@@ -400,8 +400,8 @@ export default function EventsManagement() {
 
                 rounded-xl
 
-                shadow-[0_0_20px_rgba(220,38,38,0.3)]
-                hover:shadow-[0_0_30px_rgba(220,38,38,0.6)]
+                shadow-[0_0_20px_rgba(90,18,18,0.3)]
+                hover:shadow-[0_0_30px_rgba(90,18,18,0.6)]
 
                 transition-all
                 "
@@ -510,7 +510,7 @@ export default function EventsManagement() {
 
                   hover:border-red-500/30
 
-                  hover:shadow-[0_0_25px_rgba(220,38,38,0.15)]
+                  hover:shadow-[0_0_25px_rgba(90,18,18,0.15)]
 
                   transition-all duration-300
                   "
@@ -658,3 +658,4 @@ export default function EventsManagement() {
     </div>
   );
 }
+

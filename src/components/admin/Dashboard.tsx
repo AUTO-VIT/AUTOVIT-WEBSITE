@@ -127,7 +127,7 @@ export default function AdminDashboard() {
                 className="
                 text-red-600
 
-                drop-shadow-[0_0_10px_rgba(220,38,38,0.5)]
+                drop-shadow-[0_0_10px_rgba(90,18,18,0.5)]
                 "
               >
                 V2.0
@@ -217,7 +217,7 @@ export default function AdminDashboard() {
 
                     border-red-600
 
-                    shadow-[0_0_25px_rgba(220,38,38,0.35)]
+                    shadow-[0_0_25px_rgba(90,18,18,0.35)]
                   `
                   : `
                     bg-white/60 dark:bg-zinc-900/70
@@ -229,7 +229,7 @@ export default function AdminDashboard() {
                     hover:border-red-500/40
                     hover:text-red-600
 
-                    hover:shadow-[0_0_18px_rgba(220,38,38,0.12)]
+                    hover:shadow-[0_0_18px_rgba(90,18,18,0.12)]
                   `
               )}
             >
@@ -274,3 +274,4 @@ export default function AdminDashboard() {
     </div>
   );
 }
+

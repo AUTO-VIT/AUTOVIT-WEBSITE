@@ -12,15 +12,15 @@
       "static/css/app/layout.css",
       "static/chunks/app/layout.js"
     ],
-    "/recruit/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/recruit/page.js"
-    ],
     "/admin/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
       "static/chunks/app/admin/page.js"
+    ],
+    "/recruit/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/recruit/page.js"
     ]
   }
 }
