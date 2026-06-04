@@ -3,7 +3,7 @@
 import { useEffect, useState, useMemo, memo } from "react";
 import Particles, { initParticlesEngine } from "@tsparticles/react";
 import { loadSlim } from "@tsparticles/slim";
-import type { Container, Engine, ISourceOptions } from "@tsparticles/engine";
+import type { Engine, ISourceOptions } from "@tsparticles/engine";
 
 const ParticlesBackground = memo(function ParticlesBackground() {
   const [init, setInit] = useState(false);
@@ -23,67 +23,85 @@ const ParticlesBackground = memo(function ParticlesBackground() {
           value: "transparent",
         },
       },
+
+      fullScreen: {
+        enable: false,
+      },
+
       fpsLimit: 120,
+
       interactivity: {
         events: {
-          onClick: {
-            enable: true,
-            mode: "push",
-          },
           onHover: {
             enable: true,
             mode: "grab",
           },
-        },
-        modes: {
-          push: {
-            quantity: 4,
+
+          resize: {
+            enable: true,
           },
+        },
+
+        modes: {
           grab: {
-            distance: 200,
+            distance: 180,
+
             links: {
               opacity: 0.5,
             },
           },
         },
       },
+
       particles: {
         color: {
           value: "#dc2626",
         },
+
         links: {
           color: "#dc2626",
           distance: 120,
           enable: true,
-          opacity: 0.4,
-          width: 1.5,
+          opacity: 0.25,
+          width: 1,
         },
+
         move: {
-          direction: "none",
           enable: true,
+          speed: 0.8,
+          direction: "none",
+          random: false,
+          straight: false,
+
           outModes: {
             default: "bounce",
           },
-          random: false,
-          speed: 0.8,
-          straight: false,
         },
+
         number: {
           density: {
             enable: true,
           },
-          value: 150,
+
+          value: 180,
         },
+
         opacity: {
-          value: { min: 0.3, max: 0.6 },
+          value: 0.5,
         },
+
+        size: {
+          value: {
+            min: 1,
+            max: 2,
+          },
+        },
+
         shape: {
           type: "circle",
         },
-        size: {
-          value: { min: 1, max: 2 },
-        },
       },
+
       detectRetina: true,
     }),
     []
@@ -92,11 +110,13 @@ const ParticlesBackground = memo(function ParticlesBackground() {
   if (!init) return null;
 
   return (
-    <Particles
-      id="tsparticles"
-      className="absolute inset-0 -z-10"
-      options={options}
-    />
+    <div className="fixed inset-0 z-0 pointer-events-none">
+      <Particles
+        id="tsparticles"
+        options={options}
+        className="w-full h-full"
+      />
+    </div>
   );
 });
 

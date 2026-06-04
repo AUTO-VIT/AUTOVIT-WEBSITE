@@ -32,17 +32,21 @@ export default function Team() {
 
   useEffect(() => {
     const teamRef = ref(rtdb, "team");
+
     const unsubscribe = onValue(teamRef, (snapshot) => {
       const data = snapshot.val();
+
       if (data) {
-        const teamData = Object.keys(data).map(key => ({
+        const teamData = Object.keys(data).map((key) => ({
           id: key,
-          ...data[key]
+          ...data[key],
         })) as TeamMember[];
+
         setTeam(teamData.sort((a, b) => a.order - b.order));
       } else {
         setTeam([]);
       }
+
       setLoading(false);
     });
 
@@ -50,9 +54,12 @@ export default function Team() {
   }, []);
 
   return (
-    <section id="team" className="py-24 bg-transparent relative overflow-hidden">
+    <section
+      id="team"
+      className="relative z-10 py-24 bg-transparent overflow-hidden"
+    >
       <div className="container mx-auto px-6">
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, x: 50 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
@@ -66,10 +73,13 @@ export default function Team() {
         {loading ? (
           <div className="flex flex-col justify-center items-center py-20 gap-4">
             <div className="animate-spin text-red-600 w-10 h-10 border-4 border-red-600/20 border-t-red-600 rounded-full"></div>
-            <p className="text-gray-600 font-rajdhani uppercase tracking-widest">Loading Team...</p>
+
+            <p className="text-gray-600 dark:text-gray-400 font-rajdhani uppercase tracking-widest">
+              Loading Team...
+            </p>
           </div>
         ) : (
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -100,39 +110,55 @@ export default function Team() {
                   slidesPerView: 4,
                 },
               }}
-              className="pb-16"
+              className="pb-20"
             >
               {team.map((member) => (
-                <SwiperSlide key={member.id}>
-                  <div className="bg-white/40 backdrop-blur-md p-8 rounded-sm shadow-sm border border-red-600/10 flex flex-col items-center text-center group transition-all hover:shadow-xl hover:-translate-y-1 hover:border-red-600/30 h-full">
-                    <div className="relative w-32 h-32 mb-6 rounded-full overflow-hidden border-2 border-red-600/10 group-hover:border-red-600 transition-colors">
+                <SwiperSlide
+                  key={member.id}
+                  className="h-auto flex"
+                >
+                  <div className="bg-white/40 dark:bg-zinc-900/60 backdrop-blur-md p-8 rounded-sm shadow-sm dark:shadow-md border border-red-600/10 dark:border-[#991b1b]/20 flex flex-col items-center text-center group transition-all hover:shadow-xl dark:hover:shadow-red-500/20 hover:border-red-600/50 dark:hover:border-[#991b1b]/40 w-full min-h-[420px]">
+
+                    <div className="relative w-32 h-32 mb-6 rounded-full overflow-hidden border-2 border-red-600/10 group-hover:border-red-600 dark:group-hover:border-red-500 transition-colors flex-shrink-0">
                       {member.photoUrl ? (
-                        <Image 
-                          src={member.photoUrl} 
-                          alt={member.name} 
+                        <Image
+                          src={member.photoUrl}
+                          alt={member.name}
                           fill
                           className="object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
                         />
                       ) : (
-                        <UserCircle className="w-full h-full text-gray-300" />
+                        <UserCircle className="w-full h-full text-gray-300 dark:text-gray-600" />
                       )}
                     </div>
 
-                    <h3 className="font-orbitron text-xs font-bold uppercase tracking-[0.2em] text-red-600 mb-1">
+                    <h3 className="font-orbitron text-xs font-bold uppercase tracking-[0.2em] text-red-600 mb-2 min-h-[32px] flex items-center justify-center">
                       {member.role}
                     </h3>
-                    <h4 className="font-orbitron text-xl font-bold uppercase tracking-tighter text-gray-900 mb-6">
+
+                    <h4 className="font-orbitron text-xl font-bold uppercase tracking-tighter text-gray-900 dark:text-white mb-6 min-h-[64px] flex items-center justify-center">
                       {member.name}
                     </h4>
 
                     <div className="flex items-center gap-4 mt-auto">
                       {member.github && (
-                        <a href={member.github} target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-red-600 transition-colors">
+                        <a
+                          href={member.github}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-gray-400 dark:text-gray-500 hover:text-red-600 dark:hover:text-[#7f1d1d] transition-colors"
+                        >
                           <Github size={20} />
                         </a>
                       )}
+
                       {member.linkedin && (
-                        <a href={member.linkedin} target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-red-600 transition-colors">
+                        <a
+                          href={member.linkedin}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-gray-400 dark:text-gray-500 hover:text-red-600 dark:hover:text-[#7f1d1d] transition-colors"
+                        >
                           <Linkedin size={20} />
                         </a>
                       )}
@@ -146,13 +172,48 @@ export default function Team() {
       </div>
 
       <style jsx global>{`
+        .swiper-pagination {
+          bottom: 0px !important;
+        }
+
+        .swiper-pagination-bullet {
+          background: #6b7280 !important;
+          opacity: 0.8;
+        }
+
+        .dark .swiper-pagination-bullet {
+          background: #9ca3af !important;
+          opacity: 1;
+        }
+
         .swiper-pagination-bullet-active {
           background: #dc2626 !important;
         }
-        .swiper-button-next, .swiper-button-prev {
+
+        .dark .swiper-pagination-bullet-active {
+          background: #ef4444 !important;
+        }
+
+        .swiper-button-next,
+        .swiper-button-prev {
           color: #dc2626 !important;
+        }
+
+        .dark .swiper-button-next,
+        .dark .swiper-button-prev {
+          color: #ef4444 !important;
+        }
+
+        .swiper {
+          padding-bottom: 60px !important;
+        }
+
+        .swiper-slide {
+          height: auto !important;
+          display: flex;
         }
       `}</style>
     </section>
   );
 }
+

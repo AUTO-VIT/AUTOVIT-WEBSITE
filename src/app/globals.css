@@ -19,9 +19,14 @@ body {
   position: relative;
 }
 
+html.dark body {
+  color: #F5F5F5;
+  background: #050505;
+}
+
 @layer components {
   .section-title {
-    @apply font-orbitron text-4xl md:text-5xl font-black text-gray-900 uppercase tracking-tighter;
+    @apply font-orbitron text-4xl md:text-5xl font-black text-gray-900 dark:text-white uppercase tracking-tighter transition-colors duration-300;
   }
   
   .title-underline {
@@ -29,12 +34,63 @@ body {
   }
   
   .btn-primary {
-    @apply px-8 py-3 rounded-sm font-rajdhani font-bold text-white bg-red-600 hover:bg-red-700 transition-colors uppercase tracking-widest relative overflow-hidden inline-flex items-center justify-center;
-  }
+  @apply
+  px-8 py-3 rounded-sm
+
+  font-rajdhani
+  font-bold
+
+  text-white
+
+  bg-red-600
+  hover:bg-red-700
+
+  dark:bg-[#991b1b]
+  dark:hover:bg-[#b91c1c]
+
+  border
+  dark:border-[#8f1d1d]
+
+  transition-all
+
+  uppercase
+  tracking-widest
+
+  relative overflow-hidden
+
+  inline-flex
+  items-center
+  justify-center
+  gap-2;
+}
   
   .btn-secondary {
-    @apply px-8 py-3 rounded-sm font-rajdhani font-bold text-red-600 border border-red-600/20 hover:bg-red-600 hover:text-white transition-all uppercase tracking-widest;
-  }
+  @apply
+  px-8 py-3 rounded-sm
+
+  font-rajdhani
+  font-bold
+
+  text-red-600
+  dark:text-[#991b1b]
+
+  border
+  border-red-600/20
+  dark:border-[#991b1b]/30
+
+  hover:bg-red-600
+  dark:hover:bg-[#991b1b]
+
+  hover:text-white
+  dark:hover:text-white
+
+  transition-all
+
+  uppercase
+  tracking-widest
+
+  dark:hover:border-[#b91c1c]/40;
+}
 }
 
 /* Improved Glitch Effect */
@@ -116,8 +172,8 @@ body {
   80% { clip: rect(2px, 9999px, 100px, 0); transform: skew(0.15deg); }
   85% { clip: rect(50px, 9999px, 50px, 0); transform: skew(0.15deg); }
   90% { clip: rect(100px, 9999px, 100px, 0); transform: skew(0.15deg); }
-  95% { clip: rect(20px, 9999px, 20px, 0); transform: skew(0.15deg); }
-  100% { clip: rect(50px, 9999px, 100px, 0); transform: skew(0.15deg); }
+  95% { clip: rect(20px, 9999px, 100px, 0); transform: skew(0.15deg); }
+  100% { clip: rect(50px, 9999px, 50px, 0); transform: skew(0.15deg); }
 }
 
 /* Animations */
@@ -137,5 +193,10 @@ body {
 
 .animate-spin-reverse {
   animation: spin-reverse 20s linear infinite;
+}
+@media (pointer: fine) {
+  * {
+    cursor: none !important;
+  }
 }
 

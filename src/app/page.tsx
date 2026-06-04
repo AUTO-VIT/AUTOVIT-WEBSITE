@@ -4,20 +4,29 @@ import Domains from "@/components/home/Domains";
 import Events from "@/components/home/Events";
 import Team from "@/components/home/Team";
 import Contact from "@/components/home/Contact";
+
 import Footer from "@/components/layout/Footer";
+
 import ParticlesBackground from "@/components/ParticlesBackground";
 
 export default function Home() {
   return (
-    <main className="relative min-h-screen">
+    <main
+      className="relative min-h-screen overflow-hidden"
+    >
+      {/* Global Background */}
       <ParticlesBackground />
-      <Hero />
-      <About />
-      <Domains />
-      <Events />
-      <Team />
-      <Contact />
-      <Footer />
+
+      {/* Page Content */}
+      <div className="relative z-10">
+        <Hero />
+        <About />
+        <Domains />
+        <Events />
+        <Team />
+        <Contact />
+        <Footer />
+      </div>
     </main>
   );
 }

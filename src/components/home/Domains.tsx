@@ -51,13 +51,13 @@ const itemVariants = {
 
 export default function Domains() {
   return (
-    <section id="domains" className="py-24 bg-white relative overflow-hidden">
+    <section id="domains" className="relative z-10 py-24 bg-transparent overflow-hidden transition-colors duration-500">
       <motion.div 
         initial={{ opacity: 0, x: 100 }}
         whileInView={{ opacity: 1, x: 20 }}
         viewport={{ once: true }}
         transition={{ duration: 1.5 }}
-        className="absolute right-0 top-0 w-1/3 h-full bg-red-50/30 skew-x-12 translate-x-20 -z-10"
+        className="absolute right-0 top-0 w-1/3 h-full bg-red-50/30 dark:bg-red-900/10 skew-x-12 translate-x-20 -z-10"
       ></motion.div>
       <div className="container mx-auto px-6">
         <motion.div 
@@ -83,27 +83,27 @@ export default function Domains() {
               key={idx} 
               variants={itemVariants}
               whileHover={{ y: -10 }}
-              className="bg-white/40 backdrop-blur-md border border-red-600/10 p-8 rounded-sm group hover:border-red-600/50 hover:shadow-xl transition-all duration-500 relative overflow-hidden"
+              className="bg-white/40 dark:bg-zinc-900/60 backdrop-blur-md border border-red-600/10 dark:border-[#991b1b]/20 p-8 rounded-sm group hover:border-red-600/50 dark:hover:border-[#991b1b]/40 hover:shadow-xl dark:hover:shadow-red-500/20 transition-all duration-500 relative overflow-hidden"
             >
               <div className="absolute top-0 left-0 w-1 h-0 bg-red-600 group-hover:h-full transition-all duration-500"></div>
               <div className="text-red-600 text-4xl mb-6 group-hover:scale-110 transition-transform duration-500 origin-left">
                 <domain.icon className="w-10 h-10" />
               </div>
-              <h3 className="font-orbitron text-2xl font-bold text-gray-900 mb-4 uppercase tracking-tight group-hover:text-red-600 transition-colors">
+              <h3 className="font-orbitron text-2xl font-bold text-gray-900 dark:text-white mb-4 uppercase tracking-tight group-hover:text-red-600 dark:group-hover:text-red-500 transition-colors">
                 {domain.title}
               </h3>
-              <p className="text-gray-600 font-rajdhani text-lg mb-6 leading-relaxed">
+              <p className="text-gray-600 dark:text-gray-300 font-rajdhani text-lg mb-6 leading-relaxed">
                 {domain.desc}
               </p>
               <ul className="space-y-2">
                 {domain.points.map((point, i) => (
-                  <li key={i} className="flex items-center gap-2 text-gray-500 font-rajdhani text-sm group-hover:text-gray-900 transition-colors">
+                  <li key={i} className="flex items-center gap-2 text-gray-500 dark:text-gray-400 font-rajdhani text-sm group-hover:text-gray-900 dark:group-hover:text-gray-200 transition-colors">
                     <div className="w-1.5 h-1.5 bg-red-600 rounded-full"></div>
                     {point}
                   </li>
                 ))}
               </ul>
-              <div className="absolute -bottom-10 -right-10 text-9xl text-red-600/5 group-hover:text-red-600/10 transition-colors pointer-events-none">
+              <div className="absolute -bottom-10 -right-10 text-9xl text-red-600/5 dark:text-[#991b1b]/10 group-hover:text-red-600/10 dark:group-hover:text-red-500/20 transition-colors pointer-events-none">
                 <domain.icon className="w-48 h-48" />
               </div>
             </motion.div>
@@ -113,3 +113,5 @@ export default function Domains() {
     </section>
   );
 }
+
+
