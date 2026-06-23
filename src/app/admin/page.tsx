@@ -147,14 +147,10 @@ export default function AdminPage() {
   }
 
   /* Authorized */
-  /*
-return user ? (
-  <AdminDashboard />
-) : (
-  <AdminLogin />
-);
-*/
-
-return <AdminDashboard />;
+  return user ? (
+    <AdminDashboard />
+  ) : (
+    <AdminLogin />
+  );
 }
 

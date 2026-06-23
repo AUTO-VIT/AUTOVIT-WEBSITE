@@ -8,6 +8,8 @@ import {
   ref,
   push,
   serverTimestamp,
+  get,
+  set,
 } from "firebase/database";
 
 import { rtdb } from "@/lib/firebase";
@@ -52,6 +54,27 @@ export default function RecruitPage() {
     "idle" | "loading" | "success" | "error"
   >("idle");
 
+  const [credentials, setCredentials] = useState<{
+    code: string;
+    password: string;
+  } | null>(null);
+  const [copied, setCopied] = useState(false);
+
+  const generateUniqueCode = async (): Promise<string> => {
+    let attempts = 0;
+    while (attempts < 50) {
+      const randomNum = Math.floor(1000 + Math.random() * 9000);
+      const code = `AUTO${randomNum}`;
+      const credRef = ref(rtdb, `quiz_credentials/${code}`);
+      const snapshot = await get(credRef);
+      if (!snapshot.exists()) {
+        return code;
+      }
+      attempts++;
+    }
+    throw new Error("Failed to generate unique candidate code");
+  };
+
   const handleSubmit = async (
     e: React.FormEvent
   ) => {
@@ -65,6 +88,20 @@ export default function RecruitPage() {
     setStatus("loading");
 
     try {
+      const uniqueCode = await generateUniqueCode();
+      const password = formData.regNo.trim().toLowerCase();
+
+      // Save credentials first to reserve/claim the uniqueCode
+      const credentialsRef = ref(rtdb, `quiz_credentials/${uniqueCode}`);
+      await set(credentialsRef, {
+        name: formData.name,
+        regNo: formData.regNo,
+        password,
+        firstPref: formData.domains[0] || "",
+        secondPref: formData.domains[1] || "",
+        timestamp: serverTimestamp(),
+      });
+
       const recruitRef = ref(
         rtdb,
         "recruitments"
@@ -72,9 +109,14 @@ export default function RecruitPage() {
 
       await push(recruitRef, {
         ...formData,
+        firstPref: formData.domains[0] || "",
+        secondPref: formData.domains[1] || "",
+        uniqueCode,
+        password,
         timestamp: serverTimestamp(),
       });
 
+      setCredentials({ code: uniqueCode, password });
       setStatus("success");
 
       setFormData({
@@ -255,15 +297,83 @@ export default function RecruitPage() {
               <p
                 className="
                 text-gray-600 dark:text-gray-400
-                mb-8
+                mb-6
                 max-w-md
                 "
               >
                 Thank you for your interest in AutoVIT.
-
-                Our team will review your application
-                and get back to you soon.
+                Your application has been received successfully.
               </p>
+
+              {/* Credentials Display */}
+              <div
+                className="
+                w-full max-w-md
+                bg-gray-50 dark:bg-zinc-800/80
+                border border-gray-200 dark:border-zinc-700
+                rounded-2xl
+                p-6
+                mb-8
+                text-left
+                space-y-4
+                "
+              >
+                <h3 className="text-xs font-black uppercase tracking-wider text-red-600 border-b border-gray-200 dark:border-zinc-700 pb-2">
+                  Your Quiz Login Credentials
+                </h3>
+                <p className="text-xs text-gray-500 dark:text-gray-400">
+                  Please save these credentials. You will need them to take the recruitment quiz.
+                </p>
+                <div className="space-y-3 font-mono text-sm">
+                  <div className="flex justify-between items-center bg-white dark:bg-zinc-900 px-4 py-3 rounded-lg border border-gray-100 dark:border-zinc-800">
+                    <span className="text-gray-400 text-[10px] font-bold">UNIQUE CODE:</span>
+                    <span className="font-bold text-gray-900 dark:text-white select-all">{credentials?.code}</span>
+                  </div>
+                  <div className="flex justify-between items-center bg-white dark:bg-zinc-900 px-4 py-3 rounded-lg border border-gray-100 dark:border-zinc-800">
+                    <span className="text-gray-400 text-[10px] font-bold">PASSWORD:</span>
+                    <span className="font-bold text-gray-900 dark:text-white select-all">{credentials?.password}</span>
+                  </div>
+                </div>
+                <div className="flex gap-3 pt-2">
+                  <button
+                    onClick={() => {
+                      if (credentials) {
+                        navigator.clipboard.writeText(`Code: ${credentials.code}\nPassword: ${credentials.password}`);
+                        setCopied(true);
+                        setTimeout(() => setCopied(false), 2000);
+                      }
+                    }}
+                    className="
+                    flex-1
+                    bg-gray-100 dark:bg-zinc-700
+                    hover:bg-gray-200 dark:hover:bg-zinc-600
+                    text-gray-800 dark:text-white
+                    font-black uppercase tracking-wider text-[10px]
+                    py-3 px-4
+                    rounded-lg
+                    transition-all
+                    "
+                  >
+                    {copied ? "Copied!" : "Copy Info"}
+                  </button>
+                  <a
+                    href="/quiz"
+                    className="
+                    flex-1
+                    bg-red-600
+                    hover:bg-red-700
+                    text-white
+                    font-black uppercase tracking-wider text-[10px]
+                    py-3 px-4
+                    rounded-lg
+                    text-center
+                    transition-all
+                    "
+                  >
+                    Go To Quiz
+                  </a>
+                </div>
+              </div>
 
               <button
                 onClick={() =>
@@ -509,16 +619,23 @@ export default function RecruitPage() {
                               )}
                             </div>
 
-                            <span
-                              className="
-                              text-xs
-                              font-bold
-                              uppercase
-                              tracking-widest
-                              "
-                            >
-                              {domain}
-                            </span>
+                             <div className="flex flex-col items-start text-left">
+                              <span
+                                className="
+                                text-xs
+                                font-bold
+                                uppercase
+                                tracking-widest
+                                "
+                              >
+                                {domain}
+                              </span>
+                              {formData.domains.includes(domain) && (
+                                <span className="text-[9px] font-black uppercase text-red-600 dark:text-red-500 tracking-wider mt-1">
+                                  {formData.domains.indexOf(domain) === 0 ? "1st Preference" : "2nd Preference"}
+                                </span>
+                              )}
+                            </div>
                           </button>
                         ))}
                       </div>

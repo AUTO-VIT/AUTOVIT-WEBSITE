@@ -1,22 +1,8 @@
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
-    // Allow read/write ONLY for the specific admin email
     match /{document=**} {
-      allow read, write: if request.auth != null && request.auth.token.email == 'it.autovit22@gmail.com';
-    }
-    
-    // Public routes with specific permissions
-    match /recruitments/{docId} {
-      allow create: if true; // Validation happens at app level or can be added here
-    }
-    
-    match /events/{docId} {
-      allow read: if true;
-    }
-    
-    match /team/{docId} {
-      allow read: if true;
+      allow read, write: if false;
     }
   }
 }

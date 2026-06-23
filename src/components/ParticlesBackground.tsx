@@ -32,6 +32,10 @@ const ParticlesBackground = memo(function ParticlesBackground() {
 
       interactivity: {
         events: {
+          onClick: {
+            enable: true,
+            mode: "push",
+          },
           onHover: {
             enable: true,
             mode: "grab",
@@ -43,6 +47,9 @@ const ParticlesBackground = memo(function ParticlesBackground() {
         },
 
         modes: {
+          push: {
+            quantity: 4,
+          },
           grab: {
             distance: 180,
 
@@ -110,7 +117,7 @@ const ParticlesBackground = memo(function ParticlesBackground() {
   if (!init) return null;
 
   return (
-    <div className="fixed inset-0 z-0 pointer-events-none">
+    <div className="fixed inset-0 z-0 pointer-events-auto">
       <Particles
         id="tsparticles"
         options={options}

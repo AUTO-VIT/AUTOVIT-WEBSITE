@@ -30,15 +30,14 @@ export default function Hero() {
           animate="visible"
           className="text-center lg:text-left"
         >
-          <motion.div variants={itemVariants} className="glitch-wrapper">
+          <motion.div variants={itemVariants}>
             <h1 
-              className="font-orbitron text-4xl sm:text-5xl md:text-6xl xl:text-7xl font-black text-gray-900 dark:text-[#dc2626] mb-3 tracking-[-0.06em] uppercase relative inline-block lg:block glitch leading-none"
-              data-text="AutoVIT"
+              className="font-orbitron text-4xl sm:text-5xl md:text-6xl xl:text-7xl font-black text-gray-900 dark:text-[#b91c1c] mb-3 tracking-[-0.06em] uppercase relative inline-block lg:block leading-none"
             >
               <span className="relative z-10">
                 <span>AutoVIT</span>
               </span>
-              <span className="absolute top-0 left-0 -z-10 text-red-600/20 dark:text-red-400/30 blur-sm translate-x-1 translate-y-1 w-full select-none pointer-events-none">
+              <span className="absolute top-0 left-0 -z-10 text-red-600/20 dark:text-[#b91c1c]/30 blur-sm translate-x-1 translate-y-1 w-full select-none pointer-events-none">
                 AutoVIT
               </span>
             </h1>
@@ -47,6 +46,7 @@ export default function Hero() {
   variants={itemVariants}
   className="
   text-red-600
+  dark:text-[#b91c1c]
   font-orbitron
   font-bold
 
@@ -82,14 +82,14 @@ export default function Hero() {
           transition={{ duration: 1.2, ease: "easeOut" }}
           className="relative flex justify-center items-center"
         >
-          <div className="relative w-64 h-64 md:w-96 md:h-96 rounded-full border border-red-600/20 dark:border-[#991b1b]/30 flex justify-center items-center overflow-hidden animate-spin-slow">
-            <div className="absolute inset-0 border-t-2 border-red-600 rounded-full" style={{ transform: "rotate(45deg)" }}></div>
+          <div className="relative w-64 h-64 md:w-96 md:h-96 rounded-full border border-red-600/20 dark:border-[#b91c1c]/30 flex justify-center items-center overflow-hidden animate-spin-slow">
+            <div className="absolute inset-0 border-t-2 border-red-600 dark:border-[#b91c1c] rounded-full" style={{ transform: "rotate(45deg)" }}></div>
             <div className="absolute inset-2 border-r-2 border-gray-300 dark:border-zinc-700 rounded-full" style={{ animationDirection: "reverse" }}></div>
-            <div className="absolute inset-4 border-b-2 border-red-600/50 rounded-full"></div>
+            <div className="absolute inset-4 border-b-2 border-red-600/50 dark:border-[#b91c1c]/50 rounded-full"></div>
             
             {/* Inner static container */}
             <div className="absolute inset-8 rounded-full border border-gray-200/50 dark:border-zinc-700 flex justify-center items-center animate-spin-reverse">
-               <Settings className="w-32 h-32 text-red-600 opacity-80 dark:opacity-90" strokeWidth={1.5} />
+               <Settings className="w-32 h-32 text-red-600 dark:text-[#b91c1c] opacity-80 dark:opacity-90" strokeWidth={1.5} />
             </div>
           </div>
           
@@ -100,7 +100,7 @@ export default function Hero() {
               opacity: [0.3, 0.6, 0.3]
             }}
             transition={{ duration: 4, repeat: Infinity }}
-            className="absolute -z-10 w-[120%] h-[120%] bg-red-600/5 dark:bg-red-600/10 rounded-full blur-3xl"
+            className="absolute -z-10 w-[120%] h-[120%] bg-red-600/5 dark:bg-[#b91c1c]/10 rounded-full blur-3xl"
           ></motion.div>
         </motion.div>
       </div>

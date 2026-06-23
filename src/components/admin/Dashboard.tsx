@@ -12,12 +12,15 @@ import EventsManagement from "./EventsManagement";
 
 import TeamManagement from "./TeamManagement";
 
+import QuizManagement from "./QuizManagement";
+
 import { cn } from "@/lib/utils";
 
 import {
   Users,
   Calendar,
   LayoutDashboard,
+  HelpCircle,
 } from "lucide-react";
 
 const tabs = [
@@ -25,6 +28,12 @@ const tabs = [
     id: "recruit",
     label: "Recruitment",
     icon: LayoutDashboard,
+  },
+
+  {
+    id: "quiz",
+    label: "Quiz Questions",
+    icon: HelpCircle,
   },
 
   {
@@ -260,6 +269,10 @@ export default function AdminDashboard() {
         >
           {activeTab === "recruit" && (
             <RecruitmentDashboard />
+          )}
+
+          {activeTab === "quiz" && (
+            <QuizManagement />
           )}
 
           {activeTab === "events" && (

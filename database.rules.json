@@ -5,7 +5,45 @@
       ".write": "auth != null && auth.token.email === 'it.autovit22@gmail.com'",
       "$uid": {
         ".write": "(!data.exists() && newData.exists()) || (auth != null && auth.token.email === 'it.autovit22@gmail.com')",
-        ".validate": "newData.exists() ? newData.hasChildren(['name', 'regNo', 'department', 'year', 'domains', 'experience', 'portfolio', 'reason', 'timestamp']) : true"
+        ".validate": "newData.hasChildren(['name', 'regNo', 'department', 'year', 'domains', 'experience', 'portfolio', 'reason', 'timestamp', 'firstPref', 'uniqueCode'])",
+        "name": { ".validate": "newData.isString() && newData.val().length < 100" },
+        "regNo": { ".validate": "newData.isString() && newData.val().length < 20" },
+        "department": { ".validate": "newData.isString() && newData.val().length < 100" },
+        "year": { ".validate": "newData.isString() && newData.val().length < 20" },
+        "domains": { ".validate": "newData.exists()" },
+        "experience": { ".validate": "newData.isString() && newData.val().length < 2000" },
+        "portfolio": { ".validate": "newData.isString() && newData.val().length < 500" },
+        "reason": { ".validate": "newData.isString() && newData.val().length < 2000" },
+        "timestamp": { ".validate": "newData.isNumber()" },
+        "firstPref": { ".validate": "newData.isString() && newData.val().length < 50" },
+        "secondPref": { ".validate": "newData.isString() && newData.val().length < 50" },
+        "uniqueCode": { ".validate": "newData.isString() && newData.val().length < 20" },
+        "password": { ".validate": "newData.isString() && newData.val().length < 50" }
+      }
+    },
+    "quizzes": {
+      ".read": "true",
+      ".write": "auth != null && auth.token.email === 'it.autovit22@gmail.com'"
+    },
+    "quiz_credentials": {
+      ".read": "auth != null && auth.token.email === 'it.autovit22@gmail.com'",
+      "$candidateCode": {
+        ".read": "true",
+        ".write": "!data.exists() || (auth != null && auth.token.email === 'it.autovit22@gmail.com')"
+      }
+    },
+    "quiz_status": {
+      ".read": "auth != null && auth.token.email === 'it.autovit22@gmail.com'",
+      "$candidateCode": {
+        ".read": "true",
+        ".write": "!data.exists() || (data.exists() && data.child('completed').val() === false) || (auth != null && auth.token.email === 'it.autovit22@gmail.com')"
+      }
+    },
+    "quiz_responses": {
+      ".read": "auth != null && auth.token.email === 'it.autovit22@gmail.com'",
+      "$candidateCode": {
+        ".read": "auth != null && auth.token.email === 'it.autovit22@gmail.com'",
+        ".write": "!data.exists() || (auth != null && auth.token.email === 'it.autovit22@gmail.com')"
       }
     },
     "events": {

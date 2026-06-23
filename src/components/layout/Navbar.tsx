@@ -4,7 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import { useTheme } from "next-themes";
-import { Moon, Sun } from "lucide-react";
+import { Moon, Sun, ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 
@@ -15,8 +15,13 @@ const navLinks = [
   { name: "Events", href: "/#events" },
   { name: "Team", href: "/#team" },
   { name: "Contact", href: "/#contact" },
-  { name: "Recruit", href: "/recruit" },
-  { name: "Admin", href: "/admin" },
+  {
+    name: "Recruitment",
+    dropdown: [
+      { name: "Recruitment Form", href: "/recruit" },
+      { name: "Recruitment Quiz", href: "/quiz" },
+    ],
+  },
 ];
 
 export default function Navbar() {
@@ -73,14 +78,38 @@ export default function Navbar() {
             <ul className="flex items-center gap-8">
               {navLinks.map((link) => (
                 <li key={link.name}>
-                  <Link
-                    href={link.href}
-                    className="font-rajdhani font-semibold text-gray-700 dark:text-gray-300 hover:text-red-600 dark:hover:text-[#7f1d1d] transition-colors relative group"
-                  >
-                    {link.name}
+                  {link.dropdown ? (
+                    <div className="relative group py-2">
+                      <button
+                        className="flex items-center gap-1 font-rajdhani font-semibold text-gray-700 dark:text-gray-300 hover:text-red-650 dark:hover:text-[#7f1d1d] transition-colors"
+                      >
+                        {link.name}
+                        <ChevronDown size={14} className="transition-transform duration-300 group-hover:rotate-180" />
+                      </button>
 
-                    <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-red-600 transition-all duration-300 group-hover:w-full"></span>
-                  </Link>
+                      {/* Dropdown panel */}
+                      <div className="absolute left-1/2 -translate-x-1/2 top-full mt-2 w-48 bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 rounded-xl shadow-xl py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 pointer-events-none group-hover:pointer-events-auto before:content-[''] before:absolute before:-top-3 before:left-0 before:right-0 before:h-3 z-50">
+                        {link.dropdown.map((subLink) => (
+                          <Link
+                            key={subLink.name}
+                            href={subLink.href}
+                            className="block px-4 py-2 text-sm font-rajdhani font-semibold text-gray-700 dark:text-gray-300 hover:bg-red-50 dark:hover:bg-zinc-800 hover:text-red-600 dark:hover:text-white transition-colors"
+                          >
+                            {subLink.name}
+                          </Link>
+                        ))}
+                      </div>
+                    </div>
+                  ) : (
+                    <Link
+                      href={link.href!}
+                      className="font-rajdhani font-semibold text-gray-700 dark:text-gray-300 hover:text-red-650 dark:hover:text-[#7f1d1d] transition-colors relative group"
+                    >
+                      {link.name}
+
+                      <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-red-600 transition-all duration-300 group-hover:w-full"></span>
+                    </Link>
+                  )}
                 </li>
               ))}
             </ul>
@@ -152,21 +181,42 @@ export default function Navbar() {
       {/* Mobile Menu */}
       <div
         className={cn(
-          "fixed inset-0 z-40 flex flex-col items-center justify-center gap-8 md:hidden transition-all duration-500",
+          "fixed inset-0 z-40 flex flex-col items-center justify-center gap-6 md:hidden transition-all duration-500 overflow-y-auto pt-20",
           "bg-white dark:bg-black",
           isOpen ? "translate-x-0" : "translate-x-full"
         )}
       >
-        {navLinks.map((link) => (
-          <Link
-            key={link.name}
-            href={link.href}
-            onClick={() => setIsOpen(false)}
-            className="font-orbitron text-2xl font-bold text-gray-900 dark:text-white hover:text-red-600 transition-colors"
-          >
-            {link.name}
-          </Link>
-        ))}
+        {navLinks.map((link) => {
+          if (link.dropdown) {
+            return (
+              <div key={link.name} className="flex flex-col items-center gap-3">
+                <span className="font-orbitron text-xs uppercase tracking-widest font-black text-gray-400 dark:text-gray-500">
+                  {link.name}
+                </span>
+                {link.dropdown.map((subLink) => (
+                  <Link
+                    key={subLink.name}
+                    href={subLink.href}
+                    onClick={() => setIsOpen(false)}
+                    className="font-orbitron text-xl font-bold text-gray-900 dark:text-white hover:text-red-600 transition-colors"
+                  >
+                    {subLink.name}
+                  </Link>
+                ))}
+              </div>
+            );
+          }
+          return (
+            <Link
+              key={link.name}
+              href={link.href!}
+              onClick={() => setIsOpen(false)}
+              className="font-orbitron text-2xl font-bold text-gray-900 dark:text-white hover:text-red-600 transition-colors"
+            >
+              {link.name}
+            </Link>
+          );
+        })}
       </div>
     </>
   );

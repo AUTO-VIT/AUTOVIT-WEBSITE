@@ -21,7 +21,7 @@ import {
   Power,
 } from "lucide-react";
 
-import { formatDate } from "@/lib/utils";
+import { formatDate, cn } from "@/lib/utils";
 
 import Papa from "papaparse";
 
@@ -36,6 +36,10 @@ interface Application {
   portfolio: string;
   reason: string;
   timestamp: any;
+  firstPref?: string;
+  secondPref?: string;
+  uniqueCode?: string;
+  password?: string;
 }
 
 export default function RecruitmentDashboard() {
@@ -51,13 +55,16 @@ export default function RecruitmentDashboard() {
   const [recruitOpen, setRecruitOpen] =
     useState(true);
 
+  const [quizResponses, setQuizResponses] = useState<Record<string, any>>({});
+  const [quizzesData, setQuizzesData] = useState<Record<string, any>>({});
+
   useEffect(() => {
     const recruitRef = ref(
       rtdb,
       "recruitments"
     );
 
-    const unsubscribe = onValue(
+    const unsubscribeRecruit = onValue(
       recruitRef,
       (snapshot) => {
         const data = snapshot.val();
@@ -76,10 +83,28 @@ export default function RecruitmentDashboard() {
         }
 
         setLoading(false);
+      },
+      (error) => {
+        console.error("Firebase RTDB Error:", error);
+        setLoading(false);
       }
     );
 
-    return () => unsubscribe();
+    const responsesRef = ref(rtdb, "quiz_responses");
+    const unsubscribeResponses = onValue(responsesRef, (snapshot) => {
+      setQuizResponses(snapshot.val() || {});
+    });
+
+    const quizzesRef = ref(rtdb, "quizzes");
+    const unsubscribeQuizzes = onValue(quizzesRef, (snapshot) => {
+      setQuizzesData(snapshot.val() || {});
+    });
+
+    return () => {
+      unsubscribeRecruit();
+      unsubscribeResponses();
+      unsubscribeQuizzes();
+    };
   }, []);
 
   const filteredApps =
@@ -118,35 +143,72 @@ export default function RecruitmentDashboard() {
   ];
 
   const exportCSV = () => {
-    const csv = Papa.unparse(
-      filteredApps.map(
-        ({
-          id,
-          timestamp,
-          domains,
-          ...rest
-        }) => {
-          const domainData: Record<
-            string,
-            string
-          > = {};
+    // 1. Collect all questions across all departments to serve as standard column headers
+    const allQuestions: Record<string, string> = {};
+    Object.keys(quizzesData).forEach((dept) => {
+      const deptQuestions = quizzesData[dept] || {};
+      Object.keys(deptQuestions).forEach((qId) => {
+        allQuestions[qId] = deptQuestions[qId].text;
+      });
+    });
 
-          (domains || []).forEach(
-            (domain, idx) => {
-              domainData[
-                `Department_${idx + 1}`
-              ] = domain;
-            }
-          );
-
-          return {
-            ...rest,
-            ...domainData,
-            date: formatDate(timestamp),
-          };
+    const csvData = filteredApps.map((app) => {
+      const candidateCode = app.uniqueCode;
+      let response = candidateCode ? quizResponses[candidateCode] : null;
+      if (!response) {
+        const codeKey = Object.keys(quizResponses).find(
+          (key) => quizResponses[key].regNo === app.regNo
+        );
+        if (codeKey) {
+          response = quizResponses[codeKey];
         }
-      )
-    );
+      }
+
+      const row: Record<string, any> = {
+        "Name": app.name,
+        "Registration Number": app.regNo,
+        "Department/Branch": app.department,
+        "Year": app.year,
+        "First Preference": app.firstPref || app.domains?.[0] || "",
+        "Second Preference": app.secondPref || app.domains?.[1] || "",
+        "Unique Code": app.uniqueCode || "N/A",
+        "Password": app.password || "N/A",
+        "Previous Projects/Experience": app.experience,
+        "Portfolio Link": app.portfolio,
+        "Why Join": app.reason,
+        "Date Registered": formatDate(app.timestamp),
+        "Quiz Attempted": response ? response.department : "No",
+        "Quiz Score": response ? (response.score !== undefined ? response.score : "N/A") : "N/A",
+      };
+
+      // Map answers dynamically for all questions
+      Object.keys(allQuestions).forEach((qId) => {
+        const questionText = allQuestions[qId];
+        let candidateAnswer = "";
+        if (response && response.answers && response.answers[qId] !== undefined) {
+          const answerVal = response.answers[qId];
+          const questionObj = quizzesData[response.department]?.[qId];
+          if (questionObj && questionObj.type === "mcq" && questionObj.options) {
+            const optIdx = Number(answerVal);
+            if (!isNaN(optIdx) && questionObj.options[optIdx]) {
+              candidateAnswer = `${optIdx + 1}. ${questionObj.options[optIdx]}`;
+            } else {
+              candidateAnswer = answerVal;
+            }
+          } else {
+            candidateAnswer = answerVal;
+          }
+        }
+        row[`Q: ${questionText}`] = candidateAnswer || "N/A";
+      });
+
+      // Time taken goes to the very last column
+      row["Time Taken (sec)"] = response ? (response.timeTaken !== undefined ? response.timeTaken : "N/A") : "N/A";
+
+      return row;
+    });
+
+    const csv = Papa.unparse(csvData);
 
     const blob = new Blob([csv], {
       type: "text/csv;charset=utf-8;",
@@ -489,56 +551,27 @@ export default function RecruitmentDashboard() {
             APPLICATIONS
           </h3>
 
-          {/* Filter */}
-          <div className="flex items-center gap-3">
-            
-            <Filter
-              size={16}
-              className="
-              text-gray-400
-              "
-            />
-
-            <select
-              value={filter}
-              onChange={(e) =>
-                setFilter(
-                  e.target.value
-                )
-              }
-              className="
-              bg-transparent
-
-              text-[10px]
-
-              font-black
-
-              uppercase
-              tracking-widest
-
-              text-gray-500 dark:text-gray-400
-
-              focus:outline-none
-
-              cursor-pointer
-              "
-            >
-              <option value="All">
-                ALL DOMAINS
-              </option>
-
-              <option value="Technical">
-                TECHNICAL
-              </option>
-
-              <option value="Management">
-                MANAGEMENT
-              </option>
-
-              <option value="Social Media">
-                SOCIAL MEDIA
-              </option>
-            </select>
+          {/* Filter Tabs */}
+          <div className="flex bg-gray-100 dark:bg-zinc-800/40 p-1 rounded-xl border border-gray-200/50 dark:border-zinc-800 shrink-0">
+            {[
+              { id: "All", label: "Overall" },
+              { id: "Technical", label: "Technical" },
+              { id: "Management", label: "Management" },
+              { id: "Social Media", label: "Social Media" },
+            ].map((t) => (
+              <button
+                key={t.id}
+                onClick={() => setFilter(t.id)}
+                className={cn(
+                  "px-4 py-2 rounded-lg text-[10px] font-orbitron font-black uppercase tracking-wider transition-all",
+                  filter === t.id
+                    ? "bg-red-600 text-white shadow-sm"
+                    : "text-gray-500 dark:text-gray-400 hover:text-red-600"
+                )}
+              >
+                {t.label}
+              </button>
+            ))}
           </div>
         </div>
 
@@ -668,34 +701,25 @@ export default function RecruitmentDashboard() {
                     </td>
 
                     <td className="px-8 py-6">
-                      
-                      <div className="flex flex-wrap gap-2">
-                        {app.domains.map(
-                          (d) => (
-                            <span
-                              key={d}
-                              className="
-                              text-[8px]
-
-                              font-black
-
-                              uppercase
-
-                              tracking-widest
-
-                              bg-red-600
-
-                              text-white
-
-                              px-3 py-1
-
-                              rounded-full
-                              "
-                            >
-                              {d}
-                            </span>
-                          )
-                        )}
+                      <div className="flex flex-col gap-1">
+                        {app.domains.map((d, index) => (
+                          <span
+                            key={d}
+                            className="
+                            text-[8px]
+                            font-black
+                            uppercase
+                            tracking-widest
+                            bg-red-650 dark:bg-red-600
+                            text-white
+                            px-3 py-1
+                            rounded-full
+                            w-fit
+                            "
+                          >
+                            {d} {index === 0 ? "(1st)" : "(2nd)"}
+                          </span>
+                        ))}
                       </div>
                     </td>
 
