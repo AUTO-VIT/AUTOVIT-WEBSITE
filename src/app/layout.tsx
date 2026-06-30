@@ -33,6 +33,20 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning className="scroll-smooth">
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.addEventListener('error', function(e) {
+                const message = e.message || '';
+                if (message.indexOf('ChunkLoadError') !== -1 || message.indexOf('Loading chunk') !== -1) {
+                  window.location.reload();
+                }
+              }, true);
+            `,
+          }}
+        />
+      </head>
       <body className={cn(rajdhani.variable, orbitron.variable, "font-rajdhani text-gray-900 dark:text-white bg-white dark:bg-black min-h-screen antialiased transition-colors duration-500")}>
   <ThemeProvider>
     <CustomCursor />
