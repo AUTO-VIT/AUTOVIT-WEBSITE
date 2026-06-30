@@ -4,7 +4,7 @@
       ".read": "auth != null && auth.token.email === 'it.autovit22@gmail.com'",
       ".write": "auth != null && auth.token.email === 'it.autovit22@gmail.com'",
       "$uid": {
-        ".write": "(!data.exists() && newData.exists()) || (auth != null && auth.token.email === 'it.autovit22@gmail.com')",
+        ".write": "(root.child('settings/recruitOpen').val() === true && !data.exists() && newData.exists()) || (auth != null && auth.token.email === 'it.autovit22@gmail.com')",
         ".validate": "newData.hasChildren(['name', 'regNo', 'department', 'year', 'domains', 'experience', 'portfolio', 'reason', 'timestamp', 'firstPref', 'uniqueCode'])",
         "name": { ".validate": "newData.isString() && newData.val().length < 100" },
         "regNo": { ".validate": "newData.isString() && newData.val().length < 20" },
@@ -29,7 +29,7 @@
       ".read": "auth != null && auth.token.email === 'it.autovit22@gmail.com'",
       "$candidateCode": {
         ".read": "true",
-        ".write": "!data.exists() || (auth != null && auth.token.email === 'it.autovit22@gmail.com')"
+        ".write": "(root.child('settings/recruitOpen').val() === true && !data.exists()) || (auth != null && auth.token.email === 'it.autovit22@gmail.com')"
       }
     },
     "quiz_status": {

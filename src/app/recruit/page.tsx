@@ -612,6 +612,7 @@ export default function RecruitPage() {
                               <option
                                 key={year}
                                 value={year}
+                                className="bg-white dark:bg-zinc-800 text-gray-900 dark:text-white"
                               >
                                 {year}
                               </option>
