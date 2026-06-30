@@ -53,8 +53,18 @@ export default function Footer() {
                 className="
                 object-contain
                 rounded-md
-                shadow-[0_0_12px_rgba(255,255,255,0.8)]
-                dark:shadow-[0_0_18px_rgba(255,255,255,1)]
+                dark:hidden
+                "
+              />
+              <Image
+                src="/autovit-logo-dark.jpeg"
+                alt="AutoVIT Logo"
+                width={36}
+                height={36}
+                className="
+                object-contain
+                rounded-md
+                hidden dark:block
                 "
               />
             </div>

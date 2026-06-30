@@ -64,7 +64,13 @@ export default function Navbar() {
                 src="/WhatsApp Image 2026-05-04 at 16.38.06.jpeg"
                 alt="AutoVIT Logo"
                 fill
-                className="object-contain rounded-md shadow-[0_0_12px_rgba(255,255,255,0.8)] dark:shadow-[0_0_18px_rgba(255,255,255,1)]"
+                className="object-contain rounded-md dark:hidden"
+              />
+              <Image
+                src="/autovit-logo-dark.jpeg"
+                alt="AutoVIT Logo"
+                fill
+                className="object-contain rounded-md hidden dark:block"
               />
             </div>
 

@@ -306,7 +306,14 @@ export default function QuizPage() {
                   alt="AutoVIT Logo"
                   width={42}
                   height={42}
-                  className="object-contain"
+                  className="object-contain dark:hidden"
+                />
+                <Image
+                  src="/autovit-logo-dark.jpeg"
+                  alt="AutoVIT Logo"
+                  width={42}
+                  height={42}
+                  className="object-contain hidden dark:block"
                 />
               </div>
               <h1 className="font-orbitron text-2xl md:text-3xl font-black uppercase tracking-tighter text-gray-900 dark:text-white">

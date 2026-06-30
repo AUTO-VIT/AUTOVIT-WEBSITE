@@ -238,7 +238,17 @@ export default function RecruitPage() {
                 height={42}
                 className="
                 object-contain
-                drop-shadow-[0_0_10px_rgba(255,255,255,0.6)]
+                dark:hidden
+                "
+              />
+              <Image
+                src="/autovit-logo-dark.jpeg"
+                alt="AutoVIT Logo"
+                width={42}
+                height={42}
+                className="
+                object-contain
+                hidden dark:block
                 "
               />
             </div>
