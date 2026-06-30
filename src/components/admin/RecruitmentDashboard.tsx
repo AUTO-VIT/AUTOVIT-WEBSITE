@@ -9,6 +9,7 @@ import {
   ref,
   onValue,
   remove,
+  set,
 } from "firebase/database";
 
 import { rtdb } from "@/lib/firebase";
@@ -100,10 +101,17 @@ export default function RecruitmentDashboard() {
       setQuizzesData(snapshot.val() || {});
     });
 
+    const statusRef = ref(rtdb, "settings/recruitOpen");
+    const unsubscribeStatus = onValue(statusRef, (snapshot) => {
+      const data = snapshot.val();
+      setRecruitOpen(data !== false);
+    });
+
     return () => {
       unsubscribeRecruit();
       unsubscribeResponses();
       unsubscribeQuizzes();
+      unsubscribeStatus();
     };
   }, []);
 
@@ -359,9 +367,7 @@ export default function RecruitmentDashboard() {
         {/* Toggle */}
         <button
           onClick={() =>
-            setRecruitOpen(
-              !recruitOpen
-            )
+            set(ref(rtdb, "settings/recruitOpen"), !recruitOpen)
           }
           className={`
             flex items-center gap-3

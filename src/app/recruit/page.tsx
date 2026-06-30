@@ -1,8 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import Image from "next/image";
+import Link from "next/link";
 
 import {
   ref,
@@ -10,6 +11,7 @@ import {
   serverTimestamp,
   get,
   set,
+  onValue,
 } from "firebase/database";
 
 import { rtdb } from "@/lib/firebase";
@@ -59,6 +61,16 @@ export default function RecruitPage() {
     password: string;
   } | null>(null);
   const [copied, setCopied] = useState(false);
+  const [recruitOpen, setRecruitOpen] = useState<boolean | null>(null);
+
+  useEffect(() => {
+    const statusRef = ref(rtdb, "settings/recruitOpen");
+    const unsubscribe = onValue(statusRef, (snapshot) => {
+      const value = snapshot.val();
+      setRecruitOpen(value !== false);
+    });
+    return () => unsubscribe();
+  }, []);
 
   const generateUniqueCode = async (): Promise<string> => {
     let attempts = 0;
@@ -79,6 +91,11 @@ export default function RecruitPage() {
     e: React.FormEvent
   ) => {
     e.preventDefault();
+
+    if (!recruitOpen) {
+      alert("Recruitments are currently closed.");
+      return;
+    }
 
     if (formData.domains.length === 0) {
       alert("Please select at least one domain.");
@@ -167,6 +184,17 @@ export default function RecruitPage() {
       };
     });
   };
+
+  if (recruitOpen === null) {
+    return (
+      <main className="relative min-h-screen bg-white dark:bg-black overflow-hidden flex items-center justify-center">
+        <ParticlesBackground />
+        <div className="text-gray-900 dark:text-white font-orbitron font-bold text-lg animate-pulse">
+          LOADING...
+        </div>
+      </main>
+    );
+  }
 
   return (
     <main
@@ -267,8 +295,72 @@ export default function RecruitPage() {
             </h1>
           </div>
 
-          {/* SUCCESS */}
-          {status === "success" ? (
+          {/* SUCCESS or CLOSED */}
+          {!recruitOpen ? (
+            <div
+              className="
+              flex flex-col
+              items-center justify-center
+              py-12
+              text-center
+              animate-fade-in
+              "
+            >
+              <div
+                className="
+                w-20 h-20
+                bg-red-100 dark:bg-red-500/10
+                text-red-600 dark:text-red-500
+                rounded-full
+                flex items-center justify-center
+                mb-6
+                border border-red-500/20
+                shadow-[0_0_20px_rgba(220,38,38,0.15)]
+                "
+              >
+                <AlertCircle size={40} className="animate-pulse" />
+              </div>
+
+              <h2
+                className="
+                font-orbitron
+                text-2xl md:text-3xl
+                font-black
+                uppercase
+                tracking-tighter
+                text-gray-900 dark:text-white
+                mb-4
+                "
+              >
+                Recruitments Closed
+              </h2>
+
+              <p
+                className="
+                font-rajdhani
+                font-semibold
+                text-gray-600 dark:text-gray-400
+                max-w-md
+                text-lg
+                leading-relaxed
+                mb-8
+                "
+              >
+                Thank you for your interest! The recruitment form is currently closed. Keep an eye on our social media for future updates.
+              </p>
+
+              <Link
+                href="/"
+                className="
+                btn-primary
+                shadow-[0_0_20px_rgba(90,18,18,0.3)]
+                hover:shadow-[0_0_30px_rgba(90,18,18,0.6)]
+                "
+              >
+                GO BACK HOME
+              </Link>
+            </div>
+          ) : status === "success" ? (
             <div
               className="
               flex flex-col
