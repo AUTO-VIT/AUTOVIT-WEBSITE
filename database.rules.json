@@ -57,7 +57,7 @@
       ".read": "true",
       ".write": "auth != null && auth.token.email === 'it.autovit22@gmail.com'",
       "$member_id": {
-        ".validate": "newData.hasChildren(['name', 'role', 'image'])"
+        ".validate": "newData.hasChildren(['name', 'role', 'photoUrl'])"
       }
     },
     "settings": {

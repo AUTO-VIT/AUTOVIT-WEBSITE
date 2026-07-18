@@ -2,18 +2,26 @@
 
 import { useEffect, useState, useMemo, memo } from "react";
 import Particles, { initParticlesEngine } from "@tsparticles/react";
-import { loadSlim } from "@tsparticles/slim";
 import type { Engine, ISourceOptions } from "@tsparticles/engine";
 
 const ParticlesBackground = memo(function ParticlesBackground() {
   const [init, setInit] = useState(false);
+  const [error, setError] = useState(false);
 
   useEffect(() => {
     initParticlesEngine(async (engine: Engine) => {
+      const { loadSlim } = await import(
+        /* webpackChunkName: "tsparticles-slim-custom" */ "@tsparticles/slim"
+      );
       await loadSlim(engine);
-    }).then(() => {
-      setInit(true);
-    });
+    })
+      .then(() => {
+        setInit(true);
+      })
+      .catch((err) => {
+        console.warn("Particles engine failed to initialize:", err);
+        setError(true);
+      });
   }, []);
 
   const options: ISourceOptions = useMemo(
@@ -114,7 +122,7 @@ const ParticlesBackground = memo(function ParticlesBackground() {
     []
   );
 
-  if (!init) return null;
+  if (!init || error) return null;
 
   return (
     <div className="fixed inset-0 z-0 pointer-events-auto">

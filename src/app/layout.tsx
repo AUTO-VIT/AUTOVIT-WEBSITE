@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
+import React from "react";
 import { Rajdhani, Orbitron } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import Navbar from "@/components/layout/Navbar";
 import CustomCursor from "@/components/layout/CustomCursor";
 import ThemeProvider from "@/components/providers/ThemeProvider";
+import ChunkErrorListener from "@/components/providers/ChunkErrorListener";
 
 
 
@@ -24,6 +26,11 @@ export const metadata: Metadata = {
   title: "AutoVIT - Robotics & Automation Club",
   description:
     "Where Technology Meets Innovation. Join us in shaping the future of robotics and automation.",
+  icons: {
+    icon: "/autovit-logo.jpeg",
+    shortcut: "/autovit-logo.jpeg",
+    apple: "/autovit-logo.jpeg",
+  },
 };
 
 export default function RootLayout({
@@ -33,22 +40,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning className="scroll-smooth">
-      <head>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              window.addEventListener('error', function(e) {
-                const message = e.message || '';
-                if (message.indexOf('ChunkLoadError') !== -1 || message.indexOf('Loading chunk') !== -1) {
-                  window.location.reload();
-                }
-              }, true);
-            `,
-          }}
-        />
-      </head>
       <body className={cn(rajdhani.variable, orbitron.variable, "font-rajdhani text-gray-900 dark:text-white bg-white dark:bg-black min-h-screen antialiased transition-colors duration-500")}>
   <ThemeProvider>
+    <ChunkErrorListener />
     <CustomCursor />
     <Navbar />
     {children}

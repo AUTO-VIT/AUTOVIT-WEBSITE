@@ -170,49 +170,6 @@ export default function Team() {
           </motion.div>
         )}
       </div>
-
-      <style jsx global>{`
-        .swiper-pagination {
-          bottom: 0px !important;
-        }
-
-        .swiper-pagination-bullet {
-          background: #6b7280 !important;
-          opacity: 0.8;
-        }
-
-        .dark .swiper-pagination-bullet {
-          background: #9ca3af !important;
-          opacity: 1;
-        }
-
-        .swiper-pagination-bullet-active {
-          background: #dc2626 !important;
-        }
-
-        .dark .swiper-pagination-bullet-active {
-          background: #ef4444 !important;
-        }
-
-        .swiper-button-next,
-        .swiper-button-prev {
-          color: #dc2626 !important;
-        }
-
-        .dark .swiper-button-next,
-        .dark .swiper-button-prev {
-          color: #ef4444 !important;
-        }
-
-        .swiper {
-          padding-bottom: 60px !important;
-        }
-
-        .swiper-slide {
-          height: auto !important;
-          display: flex;
-        }
-      `}</style>
     </section>
   );
 }

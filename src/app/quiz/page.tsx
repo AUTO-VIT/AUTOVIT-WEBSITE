@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import { ref, get, set, serverTimestamp } from "firebase/database";
+import { ref, get, set, serverTimestamp, onValue } from "firebase/database";
 import { rtdb } from "@/lib/firebase";
 import Image from "next/image";
 import Footer from "@/components/layout/Footer";
@@ -26,6 +26,17 @@ interface Credentials {
 }
 
 export default function QuizPage() {
+  const [quizOpen, setQuizOpen] = useState<boolean | null>(null);
+
+  useEffect(() => {
+    const statusRef = ref(rtdb, "settings/quizOpen");
+    const unsubscribe = onValue(statusRef, (snapshot) => {
+      const val = snapshot.val();
+      setQuizOpen(val !== false);
+    });
+    return () => unsubscribe();
+  }, []);
+
   // Authentication & Flow State
   const [code, setCode] = useState("");
   const [password, setPassword] = useState("");
@@ -287,6 +298,35 @@ export default function QuizPage() {
     placeholder:text-gray-400
   `;
 
+  // Loading / closed gates
+  if (quizOpen === null) {
+    return (
+      <main className="relative min-h-screen bg-white dark:bg-black flex items-center justify-center">
+        <div className="animate-spin rounded-full h-10 w-10 border-2 border-red-600/20 border-t-red-600" />
+      </main>
+    );
+  }
+
+  if (!quizOpen) {
+    return (
+      <main className="relative min-h-screen bg-white dark:bg-black flex flex-col items-center justify-center px-6 text-center font-rajdhani overflow-hidden">
+        <ParticlesBackground />
+        <div className="absolute w-[600px] h-[600px] bg-red-600/10 rounded-full blur-3xl pointer-events-none" />
+        <div className="relative z-10 space-y-4">
+          <h1 className="font-orbitron text-5xl font-black uppercase tracking-tighter text-gray-900 dark:text-white">
+            Quiz Closed
+          </h1>
+          <p className="text-red-600 font-bold uppercase tracking-widest text-sm">
+            The recruitment quiz is currently closed.
+          </p>
+          <p className="text-gray-500 dark:text-gray-400 max-w-md">
+            Please check back later or contact the AutoVIT team for more information.
+          </p>
+        </div>
+      </main>
+    );
+  }
+
   return (
     <main className="relative min-h-screen bg-white dark:bg-black transition-colors duration-500 overflow-hidden flex flex-col justify-between">
       <ParticlesBackground />
@@ -450,7 +490,7 @@ export default function QuizPage() {
                 <button
                   type="button"
                   onClick={handleLogout}
-                  className="w-1/3 py-5 bg-gray-100 dark:bg-zinc-800 hover:bg-gray-200 dark:hover:bg-zinc-750 text-gray-700 dark:text-white rounded-xl uppercase font-black tracking-widest text-xs transition-colors"
+                  className="w-1/3 py-5 bg-gray-100 dark:bg-zinc-800 hover:bg-gray-200 dark:hover:bg-zinc-700 text-gray-700 dark:text-white rounded-xl uppercase font-black tracking-widest text-xs transition-colors"
                 >
                   Log Out
                 </button>
@@ -479,7 +519,7 @@ export default function QuizPage() {
                     Candidate: {session.creds.name} ({session.creds.regNo})
                   </p>
                 </div>
-                <div className="flex items-center gap-2 bg-red-600/10 border border-red-650/20 text-red-600 px-4 py-2 rounded-xl">
+                <div className="flex items-center gap-2 bg-red-600/10 border border-red-600/20 text-red-600 px-4 py-2 rounded-xl">
                   <Clock size={16} />
                   <span className="font-mono text-sm font-black">{formatTime(elapsedTime)}</span>
                 </div>
@@ -490,7 +530,7 @@ export default function QuizPage() {
                 {questions.map((q, idx) => (
                   <div
                     key={q.id}
-                    className="space-y-4 p-5 rounded-2xl bg-gray-50/50 dark:bg-zinc-850/30 border border-gray-150 dark:border-zinc-800/80"
+                    className="space-y-4 p-5 rounded-2xl bg-gray-50/50 dark:bg-zinc-900/30 border border-gray-200 dark:border-zinc-800/80"
                   >
                     <div className="flex items-start gap-2.5">
                       <span className="text-xs font-bold font-mono text-red-600 dark:text-red-500 bg-red-100 dark:bg-red-500/10 px-2 py-0.5 rounded">

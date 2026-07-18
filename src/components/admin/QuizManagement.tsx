@@ -1,9 +1,9 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { ref, push, remove, onValue } from "firebase/database";
+import { ref, push, remove, onValue, set } from "firebase/database";
 import { rtdb } from "@/lib/firebase";
-import { Trash2, Plus, HelpCircle, ToggleLeft, ToggleRight } from "lucide-react";
+import { Trash2, Plus, HelpCircle, ToggleLeft, ToggleRight, Power } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface Question {
@@ -19,6 +19,7 @@ export default function QuizManagement() {
   const [selectedDept, setSelectedDept] = useState<"Technical" | "Management" | "Social Media">("Technical");
   const [questions, setQuestions] = useState<Question[]>([]);
   const [loading, setLoading] = useState(true);
+  const [quizOpen, setQuizOpen] = useState(true);
 
   // Form State
   const [text, setText] = useState("");
@@ -53,6 +54,15 @@ export default function QuizManagement() {
 
     return () => unsubscribe();
   }, [selectedDept]);
+
+  useEffect(() => {
+    const statusRef = ref(rtdb, "settings/quizOpen");
+    const unsubscribe = onValue(statusRef, (snapshot) => {
+      const val = snapshot.val();
+      setQuizOpen(val !== false);
+    });
+    return () => unsubscribe();
+  }, []);
 
   const handleAddQuestion = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -145,22 +155,38 @@ export default function QuizManagement() {
           </p>
         </div>
 
-        {/* Dept Selector Tabs */}
-        <div className="flex bg-gray-100 dark:bg-zinc-800/50 p-1 rounded-xl border border-gray-200 dark:border-zinc-850">
-          {depts.map((d) => (
-            <button
-              key={d}
-              onClick={() => setSelectedDept(d)}
-              className={cn(
-                "px-5 py-2 rounded-lg text-xs font-orbitron font-bold uppercase tracking-wider transition-all",
-                selectedDept === d
-                  ? "bg-red-600 text-white shadow-md"
-                  : "text-gray-500 dark:text-gray-400 hover:text-red-600"
-              )}
-            >
-              {d}
-            </button>
-          ))}
+        <div className="flex items-center gap-4 flex-wrap">
+          {/* Quiz Open/Close Toggle */}
+          <button
+            type="button"
+            onClick={() => set(ref(rtdb, "settings/quizOpen"), !quizOpen)}
+            className={`flex items-center gap-3 px-6 py-3 rounded-xl font-orbitron text-xs font-black uppercase tracking-widest transition-all duration-300 ${
+              quizOpen
+                ? "bg-red-600 text-white shadow-[0_0_25px_rgba(90,18,18,0.35)]"
+                : "bg-white/60 dark:bg-zinc-900/60 border border-gray-200 dark:border-zinc-700 text-gray-500 dark:text-gray-400"
+            }`}
+          >
+            <Power size={14} />
+            QUIZ: {quizOpen ? "OPEN" : "CLOSED"}
+          </button>
+
+          {/* Dept Selector Tabs */}
+          <div className="flex bg-gray-100 dark:bg-zinc-800/50 p-1 rounded-xl border border-gray-200 dark:border-zinc-850">
+            {depts.map((d) => (
+              <button
+                key={d}
+                onClick={() => setSelectedDept(d)}
+                className={cn(
+                  "px-5 py-2 rounded-lg text-xs font-orbitron font-bold uppercase tracking-wider transition-all",
+                  selectedDept === d
+                    ? "bg-red-600 text-white shadow-md"
+                    : "text-gray-500 dark:text-gray-400 hover:text-red-600"
+                )}
+              >
+                {d}
+              </button>
+            ))}
+          </div>
         </div>
       </div>
 

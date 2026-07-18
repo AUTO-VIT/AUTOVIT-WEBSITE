@@ -87,7 +87,7 @@ export default function Navbar() {
                   {link.dropdown ? (
                     <div className="relative group py-2">
                       <button
-                        className="flex items-center gap-1 font-rajdhani font-semibold text-gray-700 dark:text-gray-300 hover:text-red-650 dark:hover:text-[#7f1d1d] transition-colors"
+                        className="flex items-center gap-1 font-rajdhani font-semibold text-gray-700 dark:text-gray-300 hover:text-red-600 dark:hover:text-[#7f1d1d] transition-colors"
                       >
                         {link.name}
                         <ChevronDown size={14} className="transition-transform duration-300 group-hover:rotate-180" />
@@ -109,7 +109,7 @@ export default function Navbar() {
                   ) : (
                     <Link
                       href={link.href!}
-                      className="font-rajdhani font-semibold text-gray-700 dark:text-gray-300 hover:text-red-650 dark:hover:text-[#7f1d1d] transition-colors relative group"
+                      className="font-rajdhani font-semibold text-gray-700 dark:text-gray-300 hover:text-red-600 dark:hover:text-[#7f1d1d] transition-colors relative group"
                     >
                       {link.name}
 

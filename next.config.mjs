@@ -4,6 +4,10 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
+  generateBuildId: async () => {
+    // Generate a unique build ID for cache busting
+    return 'build-' + Date.now();
+  },
 };
 
 export default nextConfig;

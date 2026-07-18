@@ -9,8 +9,17 @@ import {
 } from "lucide-react";
 
 import { motion } from "framer-motion";
+import { useState } from "react";
 
 export default function Contact() {
+  const [formState, setFormState] = useState<"idle" | "success">("idle");
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    // TODO: Integrate email sending (e.g. EmailJS or an API route)
+    setFormState("success");
+    setTimeout(() => setFormState("idle"), 4000);
+  };
   return (
     <section
       id="contact"
@@ -298,6 +307,7 @@ export default function Contact() {
             }}
           >
             <form
+              onSubmit={handleSubmit}
               className="
               space-y-6
               bg-white/60 dark:bg-zinc-900/70
