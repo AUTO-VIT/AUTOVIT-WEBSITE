@@ -14,6 +14,8 @@ import TeamManagement from "./TeamManagement";
 
 import QuizManagement from "./QuizManagement";
 
+import AboutManagement from "./AboutManagement";
+
 import { cn } from "@/lib/utils";
 
 import {
@@ -21,6 +23,7 @@ import {
   Calendar,
   LayoutDashboard,
   HelpCircle,
+  ImageIcon,
 } from "lucide-react";
 
 const tabs = [
@@ -46,6 +49,12 @@ const tabs = [
     id: "team",
     label: "Leadership Team",
     icon: Users,
+  },
+
+  {
+    id: "about",
+    label: "About Images",
+    icon: ImageIcon,
   },
 ];
 
@@ -281,6 +290,10 @@ export default function AdminDashboard() {
 
           {activeTab === "team" && (
             <TeamManagement />
+          )}
+
+          {activeTab === "about" && (
+            <AboutManagement />
           )}
         </div>
       </div>

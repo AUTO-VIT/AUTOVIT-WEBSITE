@@ -9,6 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@capacitor/cli": "^8.4.2",
+    "@capacitor/core": "^8.4.2",
     "@tsparticles/react": "^3.0.0",
     "@tsparticles/slim": "^3.0.3",
     "clsx": "^2.1.1",

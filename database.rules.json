@@ -63,6 +63,10 @@
     "settings": {
        ".read": "true",
        ".write": "auth != null && auth.token.email === 'it.autovit22@gmail.com'"
+    },
+    "about": {
+      ".read": "true",
+      ".write": "auth != null && auth.token.email === 'it.autovit22@gmail.com'"
     }
   }
 }

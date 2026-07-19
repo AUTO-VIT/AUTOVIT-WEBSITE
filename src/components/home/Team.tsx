@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { ref, onValue } from "firebase/database";
 import { rtdb } from "@/lib/firebase";
+import { convertDriveUrl } from "@/lib/driveUrl";
 import { Github, Linkedin, UserCircle } from "lucide-react";
 import Image from "next/image";
 import { motion } from "framer-motion";
@@ -121,11 +122,11 @@ export default function Team() {
 
                     <div className="relative w-32 h-32 mb-6 rounded-full overflow-hidden border-2 border-red-600/10 group-hover:border-red-600 dark:group-hover:border-red-500 transition-colors flex-shrink-0">
                       {member.photoUrl ? (
-                        <Image
-                          src={member.photoUrl}
+                        // eslint-disable-next-line @next/next/no-img-element
+                        <img
+                          src={convertDriveUrl(member.photoUrl)}
                           alt={member.name}
-                          fill
-                          className="object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
+                          className="absolute inset-0 w-full h-full object-cover transition-all duration-500"
                         />
                       ) : (
                         <UserCircle className="w-full h-full text-gray-300 dark:text-gray-600" />

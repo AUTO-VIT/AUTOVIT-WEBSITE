@@ -26,6 +26,8 @@ import {
 
 import Image from "next/image";
 
+import { convertDriveUrl } from "@/lib/driveUrl";
+
 interface TeamMember {
   id: string;
   name: string;
@@ -582,17 +584,11 @@ export default function TeamManagement() {
                       "
                     >
                       {member.photoUrl ? (
-                        <Image
-                          src={
-                            member.photoUrl
-                          }
-                          alt={
-                            member.name
-                          }
-                          fill
-                          className="
-                          object-cover
-                          "
+                        // eslint-disable-next-line @next/next/no-img-element
+                        <img
+                          src={convertDriveUrl(member.photoUrl)}
+                          alt={member.name}
+                          className="absolute inset-0 w-full h-full object-cover"
                         />
                       ) : (
                         <UserCircle
