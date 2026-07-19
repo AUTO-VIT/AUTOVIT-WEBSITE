@@ -772,7 +772,6 @@ export default function RecruitPage() {
                       </label>
 
                       <input
-                        required
                         type="url"
                         value={formData.portfolio}
                         onChange={(e) =>
